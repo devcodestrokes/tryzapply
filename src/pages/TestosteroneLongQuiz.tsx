@@ -5,6 +5,7 @@ const TestosteroneLongQuiz = () => (
   <QuizEngine
     steps={testosteroneLongSteps}
     focus="testosterone"
+    variant="testosterone-long"
     headline="Find Out What's Really Happening With Your Testosterone"
     headlineSubtitle="This 2-minute assessment analyzes your symptoms, lifestyle, and risk factor in order to find a solution."
     testimonial={{
