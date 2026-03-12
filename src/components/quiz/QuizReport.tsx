@@ -137,8 +137,8 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
   return (
     <div className="w-full">
       {/* Header + Image + Bar stacked with overlaps */}
-      <div className="relative">
-        {/* Title row overlapping on top of image */}
+      <div className="relative min-h-[220px]">
+        {/* Title row */}
         <div className="flex items-start justify-between relative z-20 mt-4">
           <h2 className="text-xl font-black text-foreground tracking-tight">
             {title}
@@ -148,8 +148,8 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
           </span>
         </div>
 
-        {/* Man Image — overlaps with title and sits on top of bar */}
-        <div className="flex justify-center relative z-10 -mt-2">
+        {/* Man Image — absolute, top-aligned, centered */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10">
           <div className="relative">
             <img
               src={reportMan}
