@@ -41,12 +41,15 @@ interface QuizEngineProps {
 const QuizEngine = ({
   steps,
   focus,
+  variant,
   headline,
   headlineSubtitle,
   testimonial,
 }: QuizEngineProps) => {
   const [currentStep, setCurrentStep] = useState(-1); // -1 = intro
   const [answers, setAnswers] = useState<Record<number, number[]>>({});
+  const sessionIdRef = useRef(generateSessionId());
+  const trackedRef = useRef({ start: false, complete: false });
 
   const totalSteps = steps.length;
   const progress = currentStep < 0 ? 0 : Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
