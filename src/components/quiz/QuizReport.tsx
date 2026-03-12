@@ -150,11 +150,14 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
 
         {/* Man Image — overlaps with title and sits on top of bar */}
         <div className="flex justify-center relative z-30 -mt-2">
-          <img
-            src={reportMan}
-            alt="Assessment subject"
-            className="w-52 h-auto object-contain"
-          />
+          <div className="relative">
+            <img
+              src={reportMan}
+              alt="Assessment subject"
+              className="w-52 h-auto object-contain"
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+          </div>
         </div>
 
         {/* Level Bar — pulled up under the image */}
