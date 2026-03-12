@@ -26,6 +26,7 @@ export interface QuizOption {
   label: string;
   emoji?: string;
   icon?: string;
+  optionImage?: string;
 }
 
 interface QuizQuestionProps {
