@@ -57,9 +57,16 @@ const QuizEngine = ({
   const handleAnswer = useCallback(
     (selected: number[]) => {
       setAnswers((prev) => ({ ...prev, [currentStep]: selected }));
-      setCurrentStep((prev) => prev + 1);
+      setCurrentStep((prev) => {
+        const next = prev + 1;
+        if (next >= steps.length && !trackedRef.current.complete) {
+          trackedRef.current.complete = true;
+          trackQuizEvent(sessionIdRef.current, variant, "quiz_complete");
+        }
+        return next;
+      });
     },
-    [currentStep]
+    [currentStep, variant, steps.length]
   );
 
   const handleContinue = useCallback(() => {
