@@ -154,7 +154,7 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
             <img
               src={reportMan}
               alt="Assessment subject"
-              className="w-96 h-auto object-contain"
+              className="w-96 sm:w-52 h-auto object-contain"
             />
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
           </div>
