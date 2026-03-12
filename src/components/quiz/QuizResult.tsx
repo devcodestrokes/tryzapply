@@ -1,13 +1,16 @@
 import { useState } from "react";
 import QuizReport from "./QuizReport";
+import type { QuizStep } from "./QuizEngine";
 import zapplyProduct from "@/assets/zapply-product.png";
 
 interface QuizResultProps {
   focus: "testosterone" | "energy";
+  answers: Record<number, number[]>;
+  steps: QuizStep[];
   onClaim: () => void;
 }
 
-const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
+const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
   const [step, setStep] = useState(0);
 
   const futureDate = new Date();
@@ -24,7 +27,7 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
           Summary of your Profile
         </h2>
 
-        <QuizReport focus={focus} />
+        <QuizReport focus={focus} answers={answers} steps={steps} />
 
         <button onClick={() => setStep(1)} className="quiz-cta-button mt-6">
           CONTINUE

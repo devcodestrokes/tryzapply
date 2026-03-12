@@ -84,7 +84,7 @@ const QuizEngine = ({
 
     // Result screen
     if (currentStep >= totalSteps) {
-      return <QuizResult focus={focus} onClaim={handleClaim} />;
+      return <QuizResult focus={focus} answers={answers} steps={steps} onClaim={handleClaim} />;
     }
 
     const step = steps[currentStep];
