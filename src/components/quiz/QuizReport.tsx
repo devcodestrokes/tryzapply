@@ -148,8 +148,8 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
           </span>
         </div>
 
-        {/* Man Image — overlaps with title and touches bar */}
-        <div className="flex justify-center relative z-10 -mt-2">
+        {/* Man Image — overlaps with title and sits on top of bar */}
+        <div className="flex justify-center relative z-30 -mt-2">
           <img
             src={reportMan}
             alt="Assessment subject"
@@ -157,8 +157,8 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
           />
         </div>
 
-        {/* Level Bar — pulled up to be touched by image */}
-        <div className="relative -mt-5 z-20">
+        {/* Level Bar — pulled up under the image */}
+        <div className="relative -mt-5 z-10">
           <div className="w-full h-4 rounded-full relative" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
             <div
               className="absolute top-1/2 flex flex-col items-center"
