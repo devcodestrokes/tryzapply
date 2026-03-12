@@ -60,7 +60,7 @@ const QuizEngine = ({
   }, []);
 
   const handleClaim = () => {
-    window.open("https://mengotomars.com/products/30-day-supply-starter-kit", "_blank");
+    window.open("https://tryzapply.com/products/testo-charge-90-capsules-gratis-e-book", "_blank");
   };
 
   const renderStep = () => {
