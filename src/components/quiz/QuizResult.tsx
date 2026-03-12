@@ -81,9 +81,9 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
       </p>
 
       <img
-        src="/images/product-guarantee.png"
-        alt="Product guarantee"
-        className="w-full rounded-xl mb-6"
+        src={zapplyProduct}
+        alt="Zapply T1 supplement product"
+        className="w-full max-w-md mx-auto rounded-xl mb-6"
       />
 
       <button onClick={onClaim} className="quiz-cta-button">
