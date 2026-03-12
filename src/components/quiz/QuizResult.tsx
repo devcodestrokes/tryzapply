@@ -44,13 +44,13 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
   if (step === 0) {
     return (
       <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-        <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground">
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground mt-4">
           Summary of your Profile
         </h2>
 
         <QuizReport focus={focus} answers={answers} steps={steps} />
 
-        <button onClick={() => setStep(1)} className="quiz-cta-button mt-6">
+        <button onClick={() => setStep(1)} className="quiz-cta-button mt-6 sm:mb-12 md:mb-12" >
           CONTINUE
         </button>
       </div>
@@ -59,7 +59,7 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
 
   if (step === 1) {
     return (
-      <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+      <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400 sm:pb-5 md:pb-8 pb-6">
         <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-foreground">
           The last solution you'll ever need
           {focus === "testosterone"
@@ -76,7 +76,7 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
 
         <ResultsGraph focus={focus} riskScore={riskScore} />
 
-        <button onClick={() => setStep(2)} className="quiz-cta-button">
+        <button onClick={() => setStep(2)} className="quiz-cta-button " >
           Continue
         </button>
       </div>
