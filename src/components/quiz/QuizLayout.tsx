@@ -1,4 +1,4 @@
-import marsLogo from "@/assets/mars-men-logo.png";
+import zapplyLogo from "/zapply-logo.svg";
 
 interface QuizLayoutProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <img src={marsLogo} alt="Mars Men" className="h-10" />
+        <img src={zapplyLogo} alt="Zapply" className="h-8" />
       </div>
       {progress !== undefined && (
         <div className="w-full px-4 pt-2">
