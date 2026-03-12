@@ -1,9 +1,13 @@
+import { useState } from "react";
+
 interface QuizResultProps {
   focus: "testosterone" | "energy";
   onClaim: () => void;
 }
 
 const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
+  const [step, setStep] = useState(0);
+
   const futureDate = new Date();
   futureDate.setDate(futureDate.getDate() + 90);
   const dateStr = futureDate.toLocaleDateString("en-US", {
@@ -11,36 +15,37 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
     day: "numeric",
   });
 
-  return (
-    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-      <div className="quiz-result-card mb-6">
+  if (step === 0) {
+    return (
+      <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
         <h2 className="text-xl md:text-2xl font-bold text-center mb-3 text-foreground">
           Summary of your Profile
         </h2>
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between items-center py-2 border-b border-border">
-            <span className="text-muted-foreground">Risk Level</span>
-            <span className="font-bold text-primary">Moderate-High</span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-border">
-            <span className="text-muted-foreground">Primary Concern</span>
-            <span className="font-bold">
-              {focus === "testosterone" ? "Low Testosterone" : "Low Energy"}
-            </span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-border">
-            <span className="text-muted-foreground">Recovery Potential</span>
-            <span className="font-bold text-quiz-success">High</span>
-          </div>
-          <div className="flex justify-between items-center py-2">
-            <span className="text-muted-foreground">Recommended Plan</span>
-            <span className="font-bold">90-Day Protocol</span>
-          </div>
-        </div>
-      </div>
 
-      <div className="quiz-result-card mb-6">
-        <h3 className="text-lg font-bold text-center mb-2">
+        <div className="flex flex-col gap-4 mb-6">
+          <img
+            src="/images/profile-summary-1.png"
+            alt="Profile summary chart"
+            className="w-full rounded-xl"
+          />
+          <img
+            src="/images/profile-summary-2.png"
+            alt="Profile risk analysis"
+            className="w-full rounded-xl"
+          />
+        </div>
+
+        <button onClick={() => setStep(1)} className="quiz-cta-button">
+          CONTINUE
+        </button>
+      </div>
+    );
+  }
+
+  if (step === 1) {
+    return (
+      <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+        <h3 className="text-lg md:text-xl font-bold text-center mb-2">
           The last solution you'll ever need
           {focus === "testosterone"
             ? " to feel like a man again."
@@ -53,24 +58,42 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
             : "daily energy, mental clarity and vitality"}{" "}
           by <strong>{dateStr}</strong>
         </p>
-      </div>
 
-      <div className="quiz-result-card mb-6 text-center">
-        <h3 className="text-lg font-bold mb-2">
-          {focus === "testosterone"
-            ? "You'll Reclaim Your Energy & Drive With Just a 90-Day Supply from Zapply"
-            : "You'll Reclaim Your Energy & Vitality With Just a 90-Day Supply from Zapply"}
-        </h3>
-        <p className="text-sm text-muted-foreground mb-2">
-          Because you qualify, we guarantee you'll achieve all your goals with a
-          90-day supply of our Natural{" "}
-          {focus === "testosterone" ? "T-Optimization" : "Energy-Optimization"}{" "}
-          System.
-        </p>
-        <p className="text-sm font-bold text-foreground mb-4">
-          If not, you'll receive a full refund - no questions asked!
-        </p>
+        <img
+          src="/images/results-graph.png"
+          alt="Expected results timeline"
+          className="w-full rounded-xl mb-6"
+        />
+
+        <button onClick={() => setStep(2)} className="quiz-cta-button">
+          Continue
+        </button>
       </div>
+    );
+  }
+
+  return (
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+        {focus === "testosterone"
+          ? "You'll Reclaim Your Energy & Drive With Just a 90-Day Supply from Zapply"
+          : "You'll Reclaim Your Energy & Vitality With Just a 90-Day Supply from Zapply"}
+      </h2>
+      <p className="text-sm text-muted-foreground text-center mb-2">
+        Because you qualify, we guarantee you'll achieve all your goals with a
+        90-day supply of our Natural{" "}
+        {focus === "testosterone" ? "T-Optimization" : "Energy-Optimization"}{" "}
+        System.
+      </p>
+      <p className="text-sm font-bold text-foreground text-center mb-4">
+        If not, you'll receive a full refund - no questions asked!
+      </p>
+
+      <img
+        src="/images/product-guarantee.png"
+        alt="Product guarantee"
+        className="w-full rounded-xl mb-6"
+      />
 
       <button onClick={onClaim} className="quiz-cta-button">
         CLAIM YOUR DISCOUNT
