@@ -17,6 +17,7 @@ export interface QuizStep {
   options?: QuizOption[];
   multiSelect?: boolean;
   whyWeAsk?: string;
+  image?: string;
   // For interstitial type
   title?: string;
   interstitialSubtitle?: string;
@@ -98,6 +99,7 @@ const QuizEngine = ({
             options={step.options!}
             multiSelect={step.multiSelect}
             whyWeAsk={step.whyWeAsk}
+            image={step.image}
             onAnswer={handleAnswer}
           />
         );
