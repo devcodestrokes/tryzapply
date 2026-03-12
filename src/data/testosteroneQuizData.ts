@@ -73,7 +73,6 @@ export const testosteroneLongSteps: QuizStep[] = [
     question: "What results are you expecting from increased testosterone?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
-    image: modelGoals,
     options: [
       { label: "Higher energy that lasts all day" },
       { label: "Increased muscle mass and strength" },
