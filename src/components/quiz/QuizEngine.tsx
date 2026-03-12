@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import QuizLayout from "./QuizLayout";
 import QuizQuestion from "./QuizQuestion";
 import type { QuizOption } from "./QuizQuestion";
@@ -6,6 +6,7 @@ import QuizInterstitial from "./QuizInterstitial";
 import QuizLoading from "./QuizLoading";
 import QuizResult from "./QuizResult";
 import QuizTestimonial from "./QuizTestimonial";
+import { generateSessionId, trackQuizEvent } from "@/lib/analytics";
 
 export type QuizStepType = "question" | "interstitial" | "loading" | "result";
 
