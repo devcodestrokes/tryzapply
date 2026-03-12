@@ -5,6 +5,7 @@ const TestosteroneShortQuiz = () => (
   <QuizEngine
     steps={testosteroneShortSteps}
     focus="testosterone"
+    variant="testosterone-short"
     headline="Find Out What's Really Happening With Your Testosterone"
     headlineSubtitle="This quick assessment analyzes your symptoms to find a solution — takes under 60 seconds."
     testimonial={{

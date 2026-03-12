@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import QuizLayout from "./QuizLayout";
 import QuizQuestion from "./QuizQuestion";
 import type { QuizOption } from "./QuizQuestion";
@@ -6,6 +6,7 @@ import QuizInterstitial from "./QuizInterstitial";
 import QuizLoading from "./QuizLoading";
 import QuizResult from "./QuizResult";
 import QuizTestimonial from "./QuizTestimonial";
+import { generateSessionId, trackQuizEvent } from "@/lib/analytics";
 
 export type QuizStepType = "question" | "interstitial" | "loading" | "result";
 
@@ -28,6 +29,7 @@ export interface QuizStep {
 interface QuizEngineProps {
   steps: QuizStep[];
   focus: "testosterone" | "energy";
+  variant: string;
   headline: string;
   headlineSubtitle: string;
   testimonial: {
@@ -39,12 +41,15 @@ interface QuizEngineProps {
 const QuizEngine = ({
   steps,
   focus,
+  variant,
   headline,
   headlineSubtitle,
   testimonial,
 }: QuizEngineProps) => {
   const [currentStep, setCurrentStep] = useState(-1); // -1 = intro
   const [answers, setAnswers] = useState<Record<number, number[]>>({});
+  const sessionIdRef = useRef(generateSessionId());
+  const trackedRef = useRef({ start: false, complete: false });
 
   const totalSteps = steps.length;
   const progress = currentStep < 0 ? 0 : Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
@@ -52,16 +57,37 @@ const QuizEngine = ({
   const handleAnswer = useCallback(
     (selected: number[]) => {
       setAnswers((prev) => ({ ...prev, [currentStep]: selected }));
-      setCurrentStep((prev) => prev + 1);
+      setCurrentStep((prev) => {
+        const next = prev + 1;
+        if (next >= steps.length && !trackedRef.current.complete) {
+          trackedRef.current.complete = true;
+          trackQuizEvent(sessionIdRef.current, variant, "quiz_complete");
+        }
+        return next;
+      });
     },
-    [currentStep]
+    [currentStep, variant, steps.length]
   );
 
   const handleContinue = useCallback(() => {
-    setCurrentStep((prev) => prev + 1);
-  }, []);
+    setCurrentStep((prev) => {
+      const next = prev + 1;
+      // Track quiz start when moving from intro to first step
+      if (prev === -1 && !trackedRef.current.start) {
+        trackedRef.current.start = true;
+        trackQuizEvent(sessionIdRef.current, variant, "quiz_start");
+      }
+      // Track quiz complete when reaching results
+      if (next >= steps.length && !trackedRef.current.complete) {
+        trackedRef.current.complete = true;
+        trackQuizEvent(sessionIdRef.current, variant, "quiz_complete");
+      }
+      return next;
+    });
+  }, [variant, steps.length]);
 
   const handleClaim = () => {
+    trackQuizEvent(sessionIdRef.current, variant, "claim");
     window.open("https://tryzapply.com/products/testo-charge-90-capsules-gratis-e-book", "_blank");
   };
 
