@@ -23,7 +23,7 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
       )}
       <div className="quiz-content">{children}</div>
       <div className="quiz-footer">
-        © Zapply 2025{" "}
+        © Mars Health Inc. 2025{" "}
         <a href="#" className="underline">Terms of Service</a>{" • "}
         <a href="#" className="underline">Privacy Policy</a>
       </div>
