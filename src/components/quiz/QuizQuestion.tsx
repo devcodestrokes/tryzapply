@@ -64,12 +64,15 @@ const QuizQuestion = ({
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
       {/* Image */}
       {image && (
-        <div className="flex justify-center mb-4">
-          <img
-            src={image}
-            alt=""
-            className="h-40 sm:h-52 w-auto object-contain"
-          />
+        <div className="flex justify-center -mb-3 relative z-10">
+          <div className="relative w-44 h-52 sm:w-52 sm:h-60 overflow-hidden">
+            <img
+              src={image}
+              alt=""
+              className="w-full h-full object-cover object-top rounded-b-2xl"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-transparent" />
+          </div>
         </div>
       )}
 
@@ -77,9 +80,9 @@ const QuizQuestion = ({
         {question}
       </h2>
       {subtitle && (
-        <p className="text-center text-muted-foreground mb-6 text-sm">{subtitle}</p>
+        <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
       )}
-      <div className="flex flex-col gap-3 mt-6">
+      <div className="flex flex-col gap-3 mt-4">
         {options.map((option, index) => {
           const IconComp = option.icon ? iconMap[option.icon] : null;
           return (
