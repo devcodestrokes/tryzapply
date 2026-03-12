@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QuizReport from "./QuizReport";
+import zapplyProduct from "@/assets/zapply-product.png";
 
 interface QuizResultProps {
   focus: "testosterone" | "energy";
