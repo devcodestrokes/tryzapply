@@ -101,7 +101,7 @@ const QuizQuestion = ({
               </div>
             )}
           </div>
-          <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end">
+          <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end hidden md:flex">
             <img
               src={image}
               alt=""
