@@ -1,31 +1,37 @@
-import lightningBolt from "@/assets/lightning-bolt.png";
-
 interface QuizLayoutProps {
   children: React.ReactNode;
   progress?: number;
 }
 
+const LightningSvg = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 120 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M70 0L0 115h45L30 200l90-125H75L110 0H70Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
   return (
     <div className="min-h-[100dvh] w-full bg-background flex flex-col relative overflow-hidden">
       {/* Large lightning bolt - top right */}
-      <img
-        src={lightningBolt}
-        alt=""
-        className="absolute -top-20 -right-20 w-[400px] h-[400px] md:w-[550px] md:h-[550px] opacity-[0.05] rotate-12 pointer-events-none select-none"
-      />
+      <LightningSvg className="absolute -top-10 -right-10 w-[300px] h-[450px] md:w-[400px] md:h-[600px] text-primary/[0.04] rotate-12 pointer-events-none select-none" />
 
       {/* Small lightning bolt - bottom left */}
-      <img
-        src={lightningBolt}
-        alt=""
-        className="absolute -bottom-16 -left-16 w-[250px] h-[250px] md:w-[350px] md:h-[350px] opacity-[0.03] -rotate-[25deg] pointer-events-none select-none"
-      />
+      <LightningSvg className="absolute -bottom-8 -left-8 w-[200px] h-[300px] md:w-[280px] md:h-[420px] text-primary/[0.03] -rotate-[25deg] pointer-events-none select-none" />
+
+      {/* Medium lightning bolt - center left */}
+      <LightningSvg className="absolute top-[35%] -left-4 w-[100px] h-[150px] md:w-[140px] md:h-[210px] text-primary/[0.02] rotate-[15deg] pointer-events-none select-none" />
 
       {/* Decorative circles */}
       <div className="absolute top-[15%] right-[8%] w-48 h-48 md:w-72 md:h-72 rounded-full bg-primary/[0.03] blur-3xl pointer-events-none" />
       <div className="absolute bottom-[20%] left-[5%] w-40 h-40 md:w-60 md:h-60 rounded-full bg-primary/[0.04] blur-3xl pointer-events-none" />
-      <div className="absolute top-[40%] left-[15%] w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/[0.02] blur-2xl pointer-events-none" />
 
       {/* Subtle dot grid pattern */}
       <div
