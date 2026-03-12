@@ -58,8 +58,8 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
       <div className="quiz-result-card mb-6 text-center">
         <h3 className="text-lg font-bold mb-2">
           {focus === "testosterone"
-            ? "You'll Reclaim Your Energy & Drive With Just a 90-Day Supply from Mars Men"
-            : "You'll Reclaim Your Energy & Vitality With Just a 90-Day Supply from Mars Men"}
+            ? "You'll Reclaim Your Energy & Drive With Just a 90-Day Supply from Zapply"
+            : "You'll Reclaim Your Energy & Vitality With Just a 90-Day Supply from Zapply"}
         </h3>
         <p className="text-sm text-muted-foreground mb-2">
           Because you qualify, we guarantee you'll achieve all your goals with a
