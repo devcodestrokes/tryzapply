@@ -62,17 +62,10 @@ const QuizQuestion = ({
 
   return (
     <div className="w-full h-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-400">
-      {/* Question title centered */}
-      <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
-        {question}
-      </h2>
-      {subtitle && (
-        <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
-      )}
 
       {image ? (
-        /* Desktop: image left, options right — both fill remaining height */
-        <div className="flex flex-col md:flex-row md:items-end md:gap-8 w-full mt-4 flex-1">
+        /* Desktop: image left, question+options right */
+        <div className="flex flex-col md:flex-row md:gap-8 w-full flex-1">
           <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end">
             <img
               src={image}
@@ -80,7 +73,13 @@ const QuizQuestion = ({
               className="h-56 sm:h-64 md:h-full max-h-[70vh] w-auto object-contain object-bottom drop-shadow-lg"
             />
           </div>
-          <div className="md:flex-1 w-full">
+          <div className="md:flex-1 w-full flex flex-col justify-center">
+            <h2 className="text-xl md:text-2xl font-bold mb-2 text-foreground">
+              {question}
+            </h2>
+            {subtitle && (
+              <p className="text-muted-foreground mb-4 text-sm">{subtitle}</p>
+            )}
             <div className="flex flex-col gap-3">
               {options.map((option, index) => {
                 const IconComp = option.icon ? iconMap[option.icon] : null;
@@ -110,7 +109,13 @@ const QuizQuestion = ({
         </div>
       ) : (
         /* No image: centered layout */
-        <div className="max-w-lg mx-auto w-full">
+        <div className="max-w-lg mx-auto w-full flex-1 flex flex-col justify-center">
+          <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
+            {question}
+          </h2>
+          {subtitle && (
+            <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
+          )}
           <div className="flex flex-col gap-3 mt-4">
             {options.map((option, index) => {
               const IconComp = option.icon ? iconMap[option.icon] : null;
