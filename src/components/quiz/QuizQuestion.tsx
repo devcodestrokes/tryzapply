@@ -68,6 +68,13 @@ const QuizQuestion = ({
       {image ? (
         /* Desktop: image left, question+options right | Mobile: image bottom */
         <div className="flex flex-col-reverse md:flex-row md:gap-8 w-full flex-1">
+          <div className="flex justify-center md:justify-start md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end hidden md:flex order-first">
+            <img
+              src={image}
+              alt=""
+              className="h-48 sm:h-56 md:h-full max-h-[50vh] md:max-h-[70vh] w-auto object-contain object-bottom drop-shadow-lg"
+            />
+          </div>
           <div className="md:flex-1 w-full flex flex-col justify-center">
             <h2 className="text-xl md:text-2xl font-bold mb-2 text-foreground">
               {question}
@@ -100,13 +107,6 @@ const QuizQuestion = ({
                 <p className="text-xs text-muted-foreground">{whyWeAsk}</p>
               </div>
             )}
-          </div>
-          <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end hidden md:flex">
-            <img
-              src={image}
-              alt=""
-              className="h-48 sm:h-56 md:h-full max-h-[50vh] md:max-h-[70vh] w-auto object-contain object-bottom drop-shadow-lg"
-            />
           </div>
         </div>
       ) : (
