@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QuizReport from "./QuizReport";
+import ResultsGraph from "./ResultsGraph";
 import type { QuizStep } from "./QuizEngine";
 import zapplyProduct from "@/assets/zapply-product.png";
 
@@ -10,8 +11,28 @@ interface QuizResultProps {
   onClaim: () => void;
 }
 
+// Reuse scoring logic — simple version for risk score
+function calcRiskScore(answers: Record<number, number[]>, steps: QuizStep[]): number {
+  let riskScore = 0;
+  steps.forEach((step, idx) => {
+    if (step.type !== "question" || !answers[idx]) return;
+    const selected = answers[idx];
+    const q = (step.question ?? "").toLowerCase();
+    if (q.includes("how old")) riskScore += [30, 22, 12, 5][selected[0]] ?? 10;
+    else if (q.includes("energy at 3pm") || q.includes("energy at 3 pm")) riskScore += [25, 18, 8, 0][selected[0]] ?? 10;
+    else if (q.includes("stress symptoms")) riskScore += selected[0] === 0 ? 15 : 0;
+    else if (q.includes("start noticing")) riskScore += [20, 14, 8, 5][selected[0]] ?? 8;
+    else if (q.includes("body composition")) riskScore += [0, 5, 12, 20][selected[0]] ?? 5;
+    else if (q.includes("sleep")) riskScore += [20, 12, 2, 5][selected[0]] ?? 5;
+    else if (q.includes("family history")) riskScore += selected[0] === 0 ? 12 : selected[0] === 2 ? 6 : 0;
+    else if (q.includes("processed food")) riskScore += [18, 12, 4, 0][selected[0]] ?? 5;
+  });
+  return Math.min(100, Math.max(0, riskScore));
+}
+
 const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
   const [step, setStep] = useState(0);
+  const riskScore = calcRiskScore(answers, steps);
 
   const futureDate = new Date();
   futureDate.setDate(futureDate.getDate() + 90);
@@ -39,7 +60,7 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
   if (step === 1) {
     return (
       <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-        <h3 className="text-lg md:text-xl font-bold text-center mb-2">
+        <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-foreground">
           The last solution you'll ever need
           {focus === "testosterone"
             ? " to feel like a man again."
@@ -53,11 +74,7 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
           by <strong>{dateStr}</strong>
         </p>
 
-        <img
-          src="/images/results-graph.png"
-          alt="Expected results timeline"
-          className="w-full rounded-xl mb-6"
-        />
+        <ResultsGraph focus={focus} riskScore={riskScore} />
 
         <button onClick={() => setStep(2)} className="quiz-cta-button">
           Continue
