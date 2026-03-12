@@ -7,16 +7,16 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
   return (
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       {progress !== undefined && (
-        <div className="w-full px-4 sm:px-6 pt-4 sticky top-0 z-10 bg-background">
-          <div className="quiz-progress-bar max-w-2xl mx-auto">
+        <div className="w-full px-0 pt-0 sticky top-0 z-10 bg-background">
+          <div className="w-full h-1.5 bg-muted">
             <div
-              className="quiz-progress-fill"
+              className="h-full bg-primary transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col items-center justify-start px-4 sm:px-6 py-6 sm:py-8 max-w-2xl mx-auto w-full">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full max-w-6xl mx-auto">
         {children}
       </div>
     </div>
