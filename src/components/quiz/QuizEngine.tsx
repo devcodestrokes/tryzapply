@@ -29,6 +29,7 @@ export interface QuizStep {
 interface QuizEngineProps {
   steps: QuizStep[];
   focus: "testosterone" | "energy";
+  variant: string;
   headline: string;
   headlineSubtitle: string;
   testimonial: {
