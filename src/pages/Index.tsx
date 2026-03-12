@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import marsLogo from "@/assets/mars-men-logo.png";
 
 const Index = () => {
   const quizzes = [
