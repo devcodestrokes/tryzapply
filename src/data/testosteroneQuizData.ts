@@ -110,7 +110,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "Do you have a family history of diabetes, heart disease, or metabolic issues?",
-    image: modelBrainfog,
     whyWeAsk:
       "These conditions share similar root causes with low testosterone — insulin resistance, inflammation, and metabolic dysfunction. Family patterns help us identify your risk factors.",
     options: [
