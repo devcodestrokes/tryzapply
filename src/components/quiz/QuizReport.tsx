@@ -135,7 +135,7 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
     : `Energy Assessment: ${analysis.assessmentStatus}`;
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-lg mx-auto mt-6">
       {/* Header + Image + Bar stacked with overlaps */}
       <div className="relative">
         {/* Title row overlapping on top of image */}
