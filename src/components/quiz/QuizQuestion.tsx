@@ -34,6 +34,7 @@ interface QuizQuestionProps {
   options: QuizOption[];
   multiSelect?: boolean;
   whyWeAsk?: string;
+  image?: string;
   onAnswer: (selected: number[]) => void;
 }
 
@@ -43,6 +44,7 @@ const QuizQuestion = ({
   options,
   multiSelect = false,
   whyWeAsk,
+  image,
   onAnswer,
 }: QuizQuestionProps) => {
   const [selected, setSelected] = useState<number[]>([]);
@@ -60,6 +62,17 @@ const QuizQuestion = ({
 
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+      {/* Image */}
+      {image && (
+        <div className="flex justify-center mb-4">
+          <img
+            src={image}
+            alt=""
+            className="h-40 sm:h-52 w-auto object-contain"
+          />
+        </div>
+      )}
+
       <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
         {question}
       </h2>

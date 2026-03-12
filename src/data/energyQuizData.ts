@@ -1,9 +1,20 @@
 import type { QuizStep } from "@/components/quiz/QuizEngine";
+import modelAge from "@/assets/quiz/model-age.png";
+import modelEnergy from "@/assets/quiz/model-energy.png";
+import modelCaffeine from "@/assets/quiz/model-caffeine.png";
+import modelBrainfog from "@/assets/quiz/model-brainfog.png";
+import modelDiet from "@/assets/quiz/model-diet.png";
+import modelTimeline from "@/assets/quiz/model-timeline.png";
+import modelGoals from "@/assets/quiz/model-goals.png";
+import modelSleep from "@/assets/quiz/model-sleep.png";
+import modelExercise from "@/assets/quiz/model-exercise.png";
+import modelStress from "@/assets/quiz/model-stress.png";
 
 export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How old are you?",
+    image: modelAge,
     options: [
       { label: "50+ Years Old" },
       { label: "40 - 49 Years Old" },
@@ -14,6 +25,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's draining your energy the most right now?",
+    image: modelEnergy,
     options: [
       { label: "Constant fatigue throughout the day", icon: "battery-low" },
       { label: "Afternoon energy crashes", icon: "trending-down" },
@@ -25,6 +37,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How many cups of coffee or energy drinks do you rely on daily?",
+    image: modelCaffeine,
     options: [
       { label: "4+ cups - Can't function without it", icon: "coffee" },
       { label: "2-3 cups - Need the boost", icon: "coffee" },
@@ -36,6 +49,7 @@ export const energyLongSteps: QuizStep[] = [
     type: "question",
     question: "Do you experience brain fog or difficulty concentrating?",
     subtitle: "Especially in the afternoon or after meals.",
+    image: modelBrainfog,
     options: [
       { label: "Yes, constantly" },
       { label: "Often, several times a week" },
@@ -46,6 +60,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How would you rate your diet quality?",
+    image: modelDiet,
     whyWeAsk:
       "Nutrient deficiencies are one of the leading causes of chronic fatigue. Ultra-processed foods now make up over 50% of the average diet and are linked to significantly lower energy levels.",
     options: [
@@ -58,6 +73,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "When did your energy levels start declining?",
+    image: modelTimeline,
     options: [
       { label: "Over a year ago" },
       { label: "In the past year" },
@@ -70,6 +86,7 @@ export const energyLongSteps: QuizStep[] = [
     question: "What would more energy mean for you?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
+    image: modelGoals,
     options: [
       { label: "Being more productive at work" },
       { label: "Having energy for workouts" },
@@ -87,6 +104,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How many hours of quality sleep do you get per night?",
+    image: modelSleep,
     options: [
       { label: "Less than 5 hours" },
       { label: "5-6 hours" },
@@ -97,6 +115,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "Do you exercise regularly?",
+    image: modelExercise,
     options: [
       { label: "No, I'm too tired" },
       { label: "Occasionally, when I have energy" },
@@ -107,6 +126,7 @@ export const energyLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "Do you have a family history of diabetes, heart disease, or metabolic issues?",
+    image: modelStress,
     whyWeAsk:
       "These conditions share similar root causes with chronic fatigue — insulin resistance, inflammation, and nutrient deficiencies. Family patterns help us identify your risk factors.",
     options: [
@@ -124,6 +144,7 @@ export const energyShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "How old are you?",
+    image: modelAge,
     options: [
       { label: "50+ Years Old" },
       { label: "40 - 49 Years Old" },
@@ -134,6 +155,7 @@ export const energyShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's draining your energy the most right now?",
+    image: modelEnergy,
     options: [
       { label: "Constant fatigue throughout the day", icon: "battery-low" },
       { label: "Afternoon energy crashes", icon: "trending-down" },
@@ -145,6 +167,7 @@ export const energyShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "How many cups of coffee or energy drinks do you rely on daily?",
+    image: modelCaffeine,
     options: [
       { label: "4+ cups - Can't function without it", icon: "coffee" },
       { label: "2-3 cups - Need the boost", icon: "coffee" },
@@ -157,6 +180,7 @@ export const energyShortSteps: QuizStep[] = [
     question: "What would more energy mean for you?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
+    image: modelGoals,
     options: [
       { label: "Being more productive at work" },
       { label: "Having energy for workouts" },
