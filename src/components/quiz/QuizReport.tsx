@@ -28,7 +28,7 @@ const QuizReport = ({ focus }: QuizReportProps) => {
       </div>
 
       {/* Man Image */}
-      <div className="flex justify-center -mb-2 relative z-10">
+      <div className="flex justify-center mb-4 relative z-10">
         <img
           src={tiredMan}
           alt="Assessment subject"
@@ -47,7 +47,7 @@ const QuizReport = ({ focus }: QuizReportProps) => {
         </div>
 
         {/* Bar */}
-        <div className="w-full h-4 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 relative">
+        <div className="w-full h-4 rounded-full relative" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
           {/* Indicator */}
           <div className="absolute top-1/2 -translate-y-1/2 right-[20%]">
             <div className="w-7 h-7 rounded-full border-[3px] border-primary bg-background shadow-lg" />
