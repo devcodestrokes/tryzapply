@@ -29,7 +29,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
-    image: modelMuscle,
     options: [
       { label: "Energy levels", icon: "battery" },
       { label: "Muscle mass and strength", icon: "dumbbell" },
@@ -42,7 +41,6 @@ export const testosteroneLongSteps: QuizStep[] = [
     type: "question",
     question: "Do you have stress symptoms during the day?",
     subtitle: "Like feeling tired, cranky, foggy, or moody.",
-    image: modelStress,
     options: [
       { label: "Yes" },
       { label: "No" },

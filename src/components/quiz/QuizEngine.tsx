@@ -69,7 +69,7 @@ const QuizEngine = ({
     // Intro screen
     if (currentStep === -1) {
       return (
-        <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+        <div className="w-fit animate-in fade-in slide-in-from-bottom-4 duration-400 mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-foreground">
             {headline}
           </h1>
