@@ -51,7 +51,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
-    image: modelEnergy,
     options: [
       { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
       { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
