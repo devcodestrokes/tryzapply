@@ -72,8 +72,9 @@ const QuizEngine = ({
           <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-foreground">
             {headline}
           </h1>
-          <p className="text-center text-muted-foreground text-sm md:text-base mb-6">
-            ✅ {headlineSubtitle}
+          <p className="text-center text-muted-foreground text-sm md:text-base mb-6 flex items-center justify-center gap-2">
+            <img src="/tick-icon.svg" alt="" className="w-3 h-3" />
+            {headlineSubtitle}
           </p>
           <QuizTestimonial quote={testimonial.quote} name={testimonial.name} />
         </div>
