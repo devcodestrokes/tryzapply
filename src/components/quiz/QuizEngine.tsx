@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import QuizLayout from "./QuizLayout";
-import QuizQuestion, { type QuizOption } from "./QuizQuestion";
+import QuizQuestion from "./QuizQuestion";
+import type { QuizOption } from "./QuizQuestion";
 import QuizInterstitial from "./QuizInterstitial";
 import QuizLoading from "./QuizLoading";
 import QuizResult from "./QuizResult";
