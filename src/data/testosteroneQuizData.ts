@@ -100,7 +100,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How many hours of quality sleep do you get per night?",
-    image: modelSleep,
     options: [
       { label: "Less than 5 hours" },
       { label: "5-6 hours" },
