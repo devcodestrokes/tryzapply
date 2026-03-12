@@ -72,12 +72,12 @@ const QuizQuestion = ({
 
       {image ? (
         /* Desktop: image left, options right | Mobile: stacked */
-        <div className="flex flex-col md:flex-row md:items-center md:gap-10 w-full mt-4">
+        <div className="flex flex-col md:flex-row md:items-center md:gap-8 w-full mt-4">
           <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0">
             <img
               src={image}
               alt=""
-              className="h-48 sm:h-56 md:h-72 lg:h-80 w-auto object-contain drop-shadow-lg"
+              className="h-56 sm:h-64 md:h-[22rem] lg:h-[26rem] w-auto object-contain drop-shadow-lg"
             />
           </div>
           <div className="md:flex-1 w-full">
