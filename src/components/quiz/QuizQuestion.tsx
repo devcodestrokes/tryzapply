@@ -1,8 +1,31 @@
 import { useState } from "react";
+import {
+  Battery, Dumbbell, Heart, Brain, Scale,
+  BatteryLow, TrendingDown, Wind, Zap,
+  Moon, Frown, Coffee, Ban,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+const iconMap: Record<string, LucideIcon> = {
+  battery: Battery,
+  dumbbell: Dumbbell,
+  heart: Heart,
+  brain: Brain,
+  scale: Scale,
+  "battery-low": BatteryLow,
+  "trending-down": TrendingDown,
+  wind: Wind,
+  zap: Zap,
+  moon: Moon,
+  frown: Frown,
+  coffee: Coffee,
+  ban: Ban,
+};
 
 export interface QuizOption {
   label: string;
   emoji?: string;
+  icon?: string;
 }
 
 interface QuizQuestionProps {
@@ -31,7 +54,6 @@ const QuizQuestion = ({
       );
     } else {
       setSelected([index]);
-      // Auto-advance after short delay for single select
       setTimeout(() => onAnswer([index]), 300);
     }
   };
@@ -45,25 +67,24 @@ const QuizQuestion = ({
         <p className="text-center text-muted-foreground mb-6 text-sm">{subtitle}</p>
       )}
       <div className="flex flex-col gap-3 mt-6">
-        {options.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => handleSelect(index)}
-            className={`quiz-option ${
-              selected.includes(index) ? "quiz-option-selected" : ""
-            }`}
-          >
-            <span
-              className={`quiz-option-number ${
-                selected.includes(index) ? "" : ""
+        {options.map((option, index) => {
+          const IconComp = option.icon ? iconMap[option.icon] : null;
+          return (
+            <button
+              key={index}
+              onClick={() => handleSelect(index)}
+              className={`quiz-option ${
+                selected.includes(index) ? "quiz-option-selected" : ""
               }`}
             >
-              {index + 1}
-            </span>
-            {option.emoji && <span className="text-xl">{option.emoji}</span>}
-            <span className="font-medium text-sm md:text-base">{option.label}</span>
-          </button>
-        ))}
+              <span className="quiz-option-number">
+                {index + 1}
+              </span>
+              {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
+              <span className="font-medium text-sm md:text-base">{option.label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {multiSelect && selected.length > 0 && (

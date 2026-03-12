@@ -1,3 +1,5 @@
+import marsLogo from "@/assets/mars-men-logo.png";
+
 interface QuizLayoutProps {
   children: React.ReactNode;
   progress?: number;
@@ -7,7 +9,7 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <img src="/zapply-logo.svg" alt="Zapply" className="h-8" />
+        <img src={marsLogo} alt="Mars Men" className="h-10" />
       </div>
       {progress !== undefined && (
         <div className="w-full px-4 pt-2">
@@ -21,7 +23,7 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
       )}
       <div className="quiz-content">{children}</div>
       <div className="quiz-footer">
-        © Zapply 2025{" "}
+        © Mars Health Inc. 2025{" "}
         <a href="#" className="underline">Terms of Service</a>{" • "}
         <a href="#" className="underline">Privacy Policy</a>
       </div>

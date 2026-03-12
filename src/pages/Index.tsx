@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import marsLogo from "@/assets/mars-men-logo.png";
 
 const Index = () => {
   const quizzes = [
@@ -31,7 +32,7 @@ const Index = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <img src="/zapply-logo.svg" alt="Zapply" className="h-8" />
+        <img src={marsLogo} alt="Mars Men" className="h-10" />
       </div>
       <div className="quiz-content">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 text-foreground">
@@ -62,7 +63,7 @@ const Index = () => {
         </div>
       </div>
       <div className="quiz-footer">
-        © Zapply 2025
+        © Mars Health Inc. 2025
       </div>
     </div>
   );
