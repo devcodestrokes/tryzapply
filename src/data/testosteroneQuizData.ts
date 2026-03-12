@@ -148,7 +148,6 @@ export const testosteroneShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
-    image: modelMuscle,
     options: [
       { label: "Energy levels", icon: "battery" },
       { label: "Muscle mass and strength", icon: "dumbbell" },
@@ -160,7 +159,6 @@ export const testosteroneShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
-    image: modelEnergy,
     options: [
       { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
       { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
@@ -173,7 +171,6 @@ export const testosteroneShortSteps: QuizStep[] = [
     question: "What results are you expecting from increased testosterone?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
-    image: modelGoals,
     options: [
       { label: "Higher energy that lasts all day" },
       { label: "Increased muscle mass and strength" },
