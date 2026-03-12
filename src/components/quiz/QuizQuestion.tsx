@@ -109,7 +109,13 @@ const QuizQuestion = ({
         </div>
       ) : (
         /* No image: centered layout */
-        <div className="max-w-lg mx-auto w-full">
+        <div className="max-w-lg mx-auto w-full flex-1 flex flex-col justify-center">
+          <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
+            {question}
+          </h2>
+          {subtitle && (
+            <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
+          )}
           <div className="flex flex-col gap-3 mt-4">
             {options.map((option, index) => {
               const IconComp = option.icon ? iconMap[option.icon] : null;
