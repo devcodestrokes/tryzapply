@@ -6,6 +6,10 @@ import modelEnergy from "@/assets/quiz/model-energy.png";
 import modelTimeline from "@/assets/quiz/model-timeline.png";
 import modelGoals from "@/assets/quiz/model-goals.png";
 import modelBody from "@/assets/quiz/model-body.png";
+import bodyLean from "@/assets/quiz/body-lean.png";
+import bodyAverage from "@/assets/quiz/body-average.png";
+import bodySoft from "@/assets/quiz/body-soft.png";
+import bodyHeavy from "@/assets/quiz/body-heavy.png";
 import modelSleep from "@/assets/quiz/model-sleep.png";
 import modelDiet from "@/assets/quiz/model-diet.png";
 import modelBrainfog from "@/assets/quiz/model-brainfog.png";
@@ -89,12 +93,11 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How would you describe your current body composition?",
-    image: modelBody,
     options: [
-      { label: "Lean and muscular" },
-      { label: "Average build" },
-      { label: "Soft with some muscle" },
-      { label: "Overweight/out of shape" },
+      { label: "Lean and muscular", optionImage: bodyLean },
+      { label: "Average build", optionImage: bodyAverage },
+      { label: "Soft with some muscle", optionImage: bodySoft },
+      { label: "Overweight/out of shape", optionImage: bodyHeavy },
     ],
   },
   {
