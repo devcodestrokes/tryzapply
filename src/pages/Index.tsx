@@ -62,7 +62,7 @@ const Index = () => {
         </div>
       </div>
       <div className="quiz-footer">
-        © Mars Health Inc. 2025
+        © Zapply 2025
       </div>
     </div>
   );
