@@ -121,7 +121,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How often do you eat processed foods?",
-    image: modelDiet,
     whyWeAsk:
       "Processed foods contain chemicals and additives that disrupt hormone production. Ultra-processed foods are linked to lower testosterone levels in multiple studies.",
     options: [
