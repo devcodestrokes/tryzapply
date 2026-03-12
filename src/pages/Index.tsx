@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import marsLogo from "@/assets/mars-men-logo.png";
+import zapplyLogo from "/zapply-logo.svg";
 
 const Index = () => {
   const quizzes = [
