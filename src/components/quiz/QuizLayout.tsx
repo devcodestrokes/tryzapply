@@ -55,7 +55,7 @@ const QuizLayout = ({ children, progress }: QuizLayoutProps) => {
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 w-full max-w-4xl mx-auto relative z-[1]">
+      <div className="flex-1 flex flex-col items-center justify-start pt-8 px-4 sm:px-6 lg:px-8 w-full max-w-4xl mx-auto relative z-[1]">
         {children}
       </div>
     </div>

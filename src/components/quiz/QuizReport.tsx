@@ -135,11 +135,11 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
     : `Energy Assessment: ${analysis.assessmentStatus}`;
 
   return (
-    <div className="w-full mt-0">
+    <div className="w-full mt-4">
       {/* Header + Image + Bar stacked with overlaps */}
       <div className="relative">
         {/* Title row overlapping on top of image */}
-        <div className="flex items-start justify-between relative z-20 mt-4">
+        <div className="flex items-start justify-between relative z-20 mt-6">
           <h2 className="text-xl font-black text-foreground tracking-tight">
             {title}
           </h2>
@@ -154,7 +154,7 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
             <img
               src={reportMan}
               alt="Assessment subject"
-              className="w-52 sm:w-32 lg:w-96 h-auto object-contain"
+              className="w-72 sm:w-52 lg:w-96 h-auto object-contain"
             />
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
           </div>

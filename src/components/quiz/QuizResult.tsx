@@ -44,13 +44,13 @@ const QuizResult = ({ focus, answers, steps, onClaim }: QuizResultProps) => {
   if (step === 0) {
     return (
       <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-        <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground mt-4">
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground">
           Summary of your Profile
         </h2>
 
         <QuizReport focus={focus} answers={answers} steps={steps} />
 
-        <button onClick={() => setStep(1)} className="quiz-cta-button mt-6 sm:mb-12 md:mb-12" >
+        <button onClick={() => setStep(1)} className="quiz-cta-button mt-6" >
           CONTINUE
         </button>
       </div>
