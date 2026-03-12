@@ -135,47 +135,47 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
     : `Energy Assessment: ${analysis.assessmentStatus}`;
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full">
       {/* Header + Image + Bar stacked with overlaps */}
       <div className="relative">
         {/* Title row overlapping on top of image */}
-        <div className="flex items-start justify-between relative z-20 mt-2">
-          <h2 className="text-base font-black text-foreground tracking-tight">
+        <div className="flex items-start justify-between relative z-20 mt-4">
+          <h2 className="text-xl font-black text-foreground tracking-tight">
             {title}
           </h2>
-          <span className="px-2 py-0.5 border-2 border-primary rounded-md text-[10px] font-black text-primary uppercase tracking-widest">
+          <span className="px-3 py-1 border-2 border-primary rounded-md text-xs font-black text-primary uppercase tracking-widest">
             {analysis.level}
           </span>
         </div>
 
         {/* Man Image — overlaps with title and sits on top of bar */}
-        <div className="flex justify-center relative z-10 -mt-1">
+        <div className="flex justify-center relative z-10 -mt-2">
           <div className="relative">
             <img
               src={reportMan}
               alt="Assessment subject"
-              className="w-56 h-auto object-contain"
+              className="w-52 h-auto object-contain"
             />
-            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
           </div>
         </div>
 
         {/* Level Bar — on top of image */}
-        <div className="relative -mt-4 z-20">
-          <div className="w-full h-3 rounded-full relative" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
+        <div className="relative -mt-5 z-20">
+          <div className="w-full h-4 rounded-full relative" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
             <div
               className="absolute top-1/2 flex flex-col items-center"
               style={{ left: `${100 - analysis.levelPosition}%`, transform: 'translate(-50%, -50%)' }}
             >
-              <div className="bg-foreground text-background text-[10px] font-bold px-2 py-1 rounded-md relative -top-7 whitespace-nowrap">
+              <div className="bg-foreground text-background text-xs font-bold px-3 py-1.5 rounded-md relative -top-8 whitespace-nowrap">
                 YOUR LEVEL
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
               </div>
-              <div className="w-6 h-6 rounded-full border-[3px] border-primary bg-background shadow-lg absolute top-1/2 -translate-y-1/2" />
+              <div className="w-7 h-7 rounded-full border-[3px] border-primary bg-background shadow-lg absolute top-1/2 -translate-y-1/2" />
             </div>
           </div>
 
-          <div className="flex justify-between mt-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
+          <div className="flex justify-between mt-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wider">
             <span>Low</span>
             <span>Normal</span>
             <span>Medium</span>
@@ -185,56 +185,56 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
       </div>
 
       {/* Assessment Box */}
-      <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-3 flex gap-2.5 items-start">
-        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-          <AlertTriangle className="w-4 h-4 text-primary-foreground" />
+      <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mt-4 flex gap-3 items-start">
+        <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0">
+          <AlertTriangle className="w-5 h-5 text-primary-foreground" />
         </div>
         <div>
-          <h3 className="font-black text-xs text-foreground mb-0.5">
+          <h3 className="font-black text-sm text-foreground mb-1">
             {assessmentTitle}
           </h3>
-          <p className="text-[11px] text-muted-foreground leading-relaxed">
+          <p className="text-xs text-muted-foreground leading-relaxed">
             {analysis.assessmentDesc}
           </p>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3 mt-4">
-        <div className="flex items-center gap-1.5">
-          <TrendingDown className="w-4 h-4 text-primary shrink-0" />
+      <div className="grid grid-cols-2 gap-x-6 gap-y-4 mt-5">
+        <div className="flex items-center gap-2">
+          <TrendingDown className="w-5 h-5 text-primary shrink-0" />
           <div>
-            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
               Decline Pattern:
             </p>
-            <p className="text-xs font-black text-foreground">{analysis.declinePattern}</p>
+            <p className="text-sm font-black text-foreground">{analysis.declinePattern}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5">
-          <BarChart3 className="w-4 h-4 text-primary shrink-0" />
+        <div className="flex items-center gap-2">
+          <BarChart3 className="w-5 h-5 text-primary shrink-0" />
           <div>
-            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
               Room for Improvement:
             </p>
-            <p className="text-xs font-black text-foreground">{analysis.improvementLevel}</p>
+            <p className="text-sm font-black text-foreground">{analysis.improvementLevel}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5">
-          <Zap className="w-4 h-4 text-primary shrink-0" />
+        <div className="flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary shrink-0" />
           <div>
-            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
               Root Causes:
             </p>
-            <p className="text-xs font-black text-foreground">{analysis.rootCauses}</p>
+            <p className="text-sm font-black text-foreground">{analysis.rootCauses}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5">
-          <Activity className="w-4 h-4 text-primary shrink-0" />
+        <div className="flex items-center gap-2">
+          <Activity className="w-5 h-5 text-primary shrink-0" />
           <div>
-            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
               Quality of Life Impact:
             </p>
-            <p className="text-xs font-black text-foreground">{analysis.qualityImpact}</p>
+            <p className="text-sm font-black text-foreground">{analysis.qualityImpact}</p>
           </div>
         </div>
       </div>
