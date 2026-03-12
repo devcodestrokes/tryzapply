@@ -61,8 +61,8 @@ const QuizQuestion = ({
   };
 
   return (
-    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-      {/* Question title always centered at top */}
+    <div className="w-full h-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-400">
+      {/* Question title centered */}
       <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
         {question}
       </h2>
@@ -71,13 +71,13 @@ const QuizQuestion = ({
       )}
 
       {image ? (
-        /* Desktop: image left, options right | Mobile: stacked */
-        <div className="flex flex-col md:flex-row md:items-center md:gap-8 w-full mt-4">
-          <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0">
+        /* Desktop: image left, options right — both fill remaining height */
+        <div className="flex flex-col md:flex-row md:items-end md:gap-8 w-full mt-4 flex-1">
+          <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0 md:self-stretch md:items-end">
             <img
               src={image}
               alt=""
-              className="h-56 sm:h-64 md:h-[22rem] lg:h-[26rem] w-auto object-contain drop-shadow-lg"
+              className="h-56 sm:h-64 md:h-full max-h-[70vh] w-auto object-contain object-bottom drop-shadow-lg"
             />
           </div>
           <div className="md:flex-1 w-full">
