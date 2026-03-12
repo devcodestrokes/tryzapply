@@ -1,4 +1,5 @@
 import { useState } from "react";
+import QuizReport from "./QuizReport";
 
 interface QuizResultProps {
   focus: "testosterone" | "energy";
@@ -18,24 +19,13 @@ const QuizResult = ({ focus, onClaim }: QuizResultProps) => {
   if (step === 0) {
     return (
       <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
-        <h2 className="text-xl md:text-2xl font-bold text-center mb-3 text-foreground">
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-6 text-foreground">
           Summary of your Profile
         </h2>
 
-        <div className="flex flex-col gap-4 mb-6">
-          <img
-            src="/images/profile-summary-1.png"
-            alt="Profile summary chart"
-            className="w-full rounded-xl"
-          />
-          <img
-            src="/images/profile-summary-2.png"
-            alt="Profile risk analysis"
-            className="w-full rounded-xl"
-          />
-        </div>
+        <QuizReport focus={focus} />
 
-        <button onClick={() => setStep(1)} className="quiz-cta-button">
+        <button onClick={() => setStep(1)} className="quiz-cta-button mt-6">
           CONTINUE
         </button>
       </div>
