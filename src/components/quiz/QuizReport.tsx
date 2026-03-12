@@ -136,50 +136,48 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
 
   return (
     <div className="w-full">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-2">
-        <h2 className="text-xl font-black text-foreground tracking-tight">
-          {title}
-        </h2>
-        <span className="px-3 py-1 border-2 border-primary rounded-md text-xs font-black text-primary uppercase tracking-widest">
-          {analysis.level}
-        </span>
-      </div>
-
-      {/* Man Image */}
-      <div className="flex justify-center mb-4 relative z-10">
-        <img
-          src={reportMan}
-          alt="Assessment subject"
-          className="w-48 h-auto object-contain"
-        />
-      </div>
-
-      {/* Level Bar */}
-      <div className="relative mb-1">
-        {/* Bar with indicator */}
-        <div className="w-full h-4 rounded-full relative mt-10" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
-          {/* Indicator + Tooltip together */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 flex flex-col items-center"
-            style={{ left: `${100 - analysis.levelPosition}%`, transform: 'translate(-50%, -50%)' }}
-          >
-            {/* Tooltip */}
-            <div className="bg-foreground text-background text-xs font-bold px-3 py-1.5 rounded-md relative -top-8 whitespace-nowrap">
-              YOUR LEVEL
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
-            </div>
-            {/* Circle */}
-            <div className="w-7 h-7 rounded-full border-[3px] border-primary bg-background shadow-lg absolute top-1/2 -translate-y-1/2" />
-          </div>
+      {/* Header + Image + Bar stacked with overlaps */}
+      <div className="relative">
+        {/* Title row overlapping on top of image */}
+        <div className="flex items-start justify-between relative z-20">
+          <h2 className="text-xl font-black text-foreground tracking-tight">
+            {title}
+          </h2>
+          <span className="px-3 py-1 border-2 border-primary rounded-md text-xs font-black text-primary uppercase tracking-widest">
+            {analysis.level}
+          </span>
         </div>
 
-        {/* Labels */}
-        <div className="flex justify-between mt-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-          <span>Low</span>
-          <span>Normal</span>
-          <span>Medium</span>
-          <span>High</span>
+        {/* Man Image — overlaps with title and touches bar */}
+        <div className="flex justify-center relative z-10 -mt-2">
+          <img
+            src={reportMan}
+            alt="Assessment subject"
+            className="w-52 h-auto object-contain"
+          />
+        </div>
+
+        {/* Level Bar — pulled up to be touched by image */}
+        <div className="relative -mt-5 z-20">
+          <div className="w-full h-4 rounded-full relative" style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) 60%, hsl(0, 70%, 50%) 100%)' }}>
+            <div
+              className="absolute top-1/2 flex flex-col items-center"
+              style={{ left: `${100 - analysis.levelPosition}%`, transform: 'translate(-50%, -50%)' }}
+            >
+              <div className="bg-foreground text-background text-xs font-bold px-3 py-1.5 rounded-md relative -top-8 whitespace-nowrap">
+                YOUR LEVEL
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
+              </div>
+              <div className="w-7 h-7 rounded-full border-[3px] border-primary bg-background shadow-lg absolute top-1/2 -translate-y-1/2" />
+            </div>
+          </div>
+
+          <div className="flex justify-between mt-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+            <span>Low</span>
+            <span>Normal</span>
+            <span>Medium</span>
+            <span>High</span>
+          </div>
         </div>
       </div>
 
