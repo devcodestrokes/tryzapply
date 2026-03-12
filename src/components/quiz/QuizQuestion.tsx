@@ -62,10 +62,17 @@ const QuizQuestion = ({
 
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-400">
+      {/* Question title always centered at top */}
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
+        {question}
+      </h2>
+      {subtitle && (
+        <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
+      )}
+
       {image ? (
-        /* Desktop: side-by-side layout | Mobile: stacked */
-        <div className="flex flex-col md:flex-row md:items-center md:gap-10 w-full">
-          {/* Left: Image */}
+        /* Desktop: image left, options right | Mobile: stacked */
+        <div className="flex flex-col md:flex-row md:items-center md:gap-10 w-full mt-4">
           <div className="flex justify-center md:justify-end md:flex-1 mb-4 md:mb-0">
             <img
               src={image}
@@ -73,47 +80,26 @@ const QuizQuestion = ({
               className="h-48 sm:h-56 md:h-72 lg:h-80 w-auto object-contain drop-shadow-lg"
             />
           </div>
-
-          {/* Right: Question + Options */}
           <div className="md:flex-1 w-full">
-            <h2 className="text-xl md:text-2xl font-bold text-center md:text-left mb-2 text-foreground">
-              {question}
-            </h2>
-            {subtitle && (
-              <p className="text-center md:text-left text-muted-foreground mb-4 text-sm">
-                {subtitle}
-              </p>
-            )}
-            <div className="flex flex-col gap-3 mt-4">
+            <div className="flex flex-col gap-3">
               {options.map((option, index) => {
                 const IconComp = option.icon ? iconMap[option.icon] : null;
                 return (
                   <button
                     key={index}
                     onClick={() => handleSelect(index)}
-                    className={`quiz-option ${
-                      selected.includes(index) ? "quiz-option-selected" : ""
-                    }`}
+                    className={`quiz-option ${selected.includes(index) ? "quiz-option-selected" : ""}`}
                   >
                     <span className="quiz-option-number">{index + 1}</span>
                     {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
-                    <span className="font-medium text-sm md:text-base">
-                      {option.label}
-                    </span>
+                    <span className="font-medium text-sm md:text-base">{option.label}</span>
                   </button>
                 );
               })}
             </div>
-
             {multiSelect && selected.length > 0 && (
-              <button
-                onClick={() => onAnswer(selected)}
-                className="quiz-cta-button mt-6"
-              >
-                Continue
-              </button>
+              <button onClick={() => onAnswer(selected)} className="quiz-cta-button mt-6">Continue</button>
             )}
-
             {whyWeAsk && (
               <div className="mt-6 p-4 bg-accent rounded-xl">
                 <p className="text-xs font-bold text-foreground mb-1">Why we ask</p>
@@ -124,50 +110,33 @@ const QuizQuestion = ({
         </div>
       ) : (
         /* No image: centered layout */
-        <>
-          <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-foreground">
-            {question}
-          </h2>
-          {subtitle && (
-            <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
-          )}
-          <div className="flex flex-col gap-3 mt-4 max-w-lg mx-auto w-full">
+        <div className="max-w-lg mx-auto w-full">
+          <div className="flex flex-col gap-3 mt-4">
             {options.map((option, index) => {
               const IconComp = option.icon ? iconMap[option.icon] : null;
               return (
                 <button
                   key={index}
                   onClick={() => handleSelect(index)}
-                  className={`quiz-option ${
-                    selected.includes(index) ? "quiz-option-selected" : ""
-                  }`}
+                  className={`quiz-option ${selected.includes(index) ? "quiz-option-selected" : ""}`}
                 >
                   <span className="quiz-option-number">{index + 1}</span>
                   {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
-                  <span className="font-medium text-sm md:text-base">
-                    {option.label}
-                  </span>
+                  <span className="font-medium text-sm md:text-base">{option.label}</span>
                 </button>
               );
             })}
           </div>
-
           {multiSelect && selected.length > 0 && (
-            <button
-              onClick={() => onAnswer(selected)}
-              className="quiz-cta-button mt-6 max-w-lg mx-auto"
-            >
-              Continue
-            </button>
+            <button onClick={() => onAnswer(selected)} className="quiz-cta-button mt-6">Continue</button>
           )}
-
           {whyWeAsk && (
-            <div className="mt-6 p-4 bg-accent rounded-xl max-w-lg mx-auto w-full">
+            <div className="mt-6 p-4 bg-accent rounded-xl">
               <p className="text-xs font-bold text-foreground mb-1">Why we ask</p>
               <p className="text-xs text-muted-foreground">{whyWeAsk}</p>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
