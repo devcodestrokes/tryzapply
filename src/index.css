@@ -88,11 +88,11 @@
   }
 
   .quiz-container {
-    @apply min-h-screen bg-background flex flex-col;
+    @apply min-h-[100dvh] w-full bg-background flex flex-col;
   }
 
   .quiz-content {
-    @apply flex-1 flex flex-col items-center justify-start px-4 py-8 max-w-lg mx-auto w-full;
+    @apply flex-1 flex flex-col items-center justify-start px-4 sm:px-6 py-6 sm:py-8 max-w-2xl mx-auto w-full;
   }
 
   .quiz-header {
