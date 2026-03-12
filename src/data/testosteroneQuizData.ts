@@ -1,9 +1,20 @@
 import type { QuizStep } from "@/components/quiz/QuizEngine";
+import modelAge from "@/assets/quiz/model-age.png";
+import modelMuscle from "@/assets/quiz/model-muscle.png";
+import modelStress from "@/assets/quiz/model-stress.png";
+import modelEnergy from "@/assets/quiz/model-energy.png";
+import modelTimeline from "@/assets/quiz/model-timeline.png";
+import modelGoals from "@/assets/quiz/model-goals.png";
+import modelBody from "@/assets/quiz/model-body.png";
+import modelSleep from "@/assets/quiz/model-sleep.png";
+import modelDiet from "@/assets/quiz/model-diet.png";
+import modelBrainfog from "@/assets/quiz/model-brainfog.png";
 
 export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How old are you?",
+    image: modelAge,
     options: [
       { label: "50+ Years Old" },
       { label: "40 - 49 Years Old" },
@@ -14,6 +25,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
+    image: modelMuscle,
     options: [
       { label: "Energy levels", icon: "battery" },
       { label: "Muscle mass and strength", icon: "dumbbell" },
@@ -26,6 +38,7 @@ export const testosteroneLongSteps: QuizStep[] = [
     type: "question",
     question: "Do you have stress symptoms during the day?",
     subtitle: "Like feeling tired, cranky, foggy, or moody.",
+    image: modelStress,
     options: [
       { label: "Yes" },
       { label: "No" },
@@ -34,6 +47,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
+    image: modelEnergy,
     options: [
       { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
       { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
@@ -44,6 +58,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "When did you start noticing changes to your energy and drive?",
+    image: modelTimeline,
     options: [
       { label: "Over a year ago" },
       { label: "In the past year" },
@@ -56,6 +71,7 @@ export const testosteroneLongSteps: QuizStep[] = [
     question: "What results are you expecting from increased testosterone?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
+    image: modelGoals,
     options: [
       { label: "Higher energy that lasts all day" },
       { label: "Increased muscle mass and strength" },
@@ -73,6 +89,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How would you describe your current body composition?",
+    image: modelBody,
     options: [
       { label: "Lean and muscular" },
       { label: "Average build" },
@@ -83,6 +100,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How many hours of quality sleep do you get per night?",
+    image: modelSleep,
     options: [
       { label: "Less than 5 hours" },
       { label: "5-6 hours" },
@@ -93,6 +111,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "Do you have a family history of diabetes, heart disease, or metabolic issues?",
+    image: modelBrainfog,
     whyWeAsk:
       "These conditions share similar root causes with low testosterone — insulin resistance, inflammation, and metabolic dysfunction. Family patterns help us identify your risk factors.",
     options: [
@@ -104,6 +123,7 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "How often do you eat processed foods?",
+    image: modelDiet,
     whyWeAsk:
       "Processed foods contain chemicals and additives that disrupt hormone production. Ultra-processed foods are linked to lower testosterone levels in multiple studies.",
     options: [
@@ -122,6 +142,7 @@ export const testosteroneShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "How old are you?",
+    image: modelAge,
     options: [
       { label: "50+ Years Old" },
       { label: "40 - 49 Years Old" },
@@ -132,6 +153,7 @@ export const testosteroneShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
+    image: modelMuscle,
     options: [
       { label: "Energy levels", icon: "battery" },
       { label: "Muscle mass and strength", icon: "dumbbell" },
@@ -143,6 +165,7 @@ export const testosteroneShortSteps: QuizStep[] = [
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
+    image: modelEnergy,
     options: [
       { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
       { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
@@ -155,6 +178,7 @@ export const testosteroneShortSteps: QuizStep[] = [
     question: "What results are you expecting from increased testosterone?",
     subtitle: "(Choose all that apply)",
     multiSelect: true,
+    image: modelGoals,
     options: [
       { label: "Higher energy that lasts all day" },
       { label: "Increased muscle mass and strength" },
