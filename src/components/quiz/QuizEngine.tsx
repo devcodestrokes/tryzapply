@@ -63,10 +63,24 @@ const QuizEngine = ({
   );
 
   const handleContinue = useCallback(() => {
-    setCurrentStep((prev) => prev + 1);
-  }, []);
+    setCurrentStep((prev) => {
+      const next = prev + 1;
+      // Track quiz start when moving from intro to first step
+      if (prev === -1 && !trackedRef.current.start) {
+        trackedRef.current.start = true;
+        trackQuizEvent(sessionIdRef.current, variant, "quiz_start");
+      }
+      // Track quiz complete when reaching results
+      if (next >= steps.length && !trackedRef.current.complete) {
+        trackedRef.current.complete = true;
+        trackQuizEvent(sessionIdRef.current, variant, "quiz_complete");
+      }
+      return next;
+    });
+  }, [variant, steps.length]);
 
   const handleClaim = () => {
+    trackQuizEvent(sessionIdRef.current, variant, "claim");
     window.open("https://tryzapply.com/products/testo-charge-90-capsules-gratis-e-book", "_blank");
   };
 
