@@ -117,22 +117,47 @@ const QuizQuestion = ({
           {subtitle && (
             <p className="text-center text-muted-foreground mb-4 text-sm">{subtitle}</p>
           )}
-          <div className="flex flex-col gap-3 mt-4">
-            {options.map((option, index) => {
-              const IconComp = option.icon ? iconMap[option.icon] : null;
-              return (
+          {hasOptionImages ? (
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              {options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => handleSelect(index)}
-                  className={`quiz-option ${selected.includes(index) ? "quiz-option-selected" : ""}`}
+                  className={`relative flex flex-col items-center rounded-2xl border-2 p-3 transition-all duration-200 cursor-pointer ${
+                    selected.includes(index)
+                      ? "border-primary bg-primary/10 shadow-md"
+                      : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+                  }`}
                 >
-                  <span className="quiz-option-number">{index + 1}</span>
-                  {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
-                  <span className="font-medium text-sm md:text-base">{option.label}</span>
+                  {option.optionImage && (
+                    <img
+                      src={option.optionImage}
+                      alt={option.label}
+                      className="h-32 sm:h-40 w-auto object-contain mb-2"
+                    />
+                  )}
+                  <span className="font-medium text-sm text-foreground">{option.label}</span>
                 </button>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3 mt-4">
+              {options.map((option, index) => {
+                const IconComp = option.icon ? iconMap[option.icon] : null;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleSelect(index)}
+                    className={`quiz-option ${selected.includes(index) ? "quiz-option-selected" : ""}`}
+                  >
+                    <span className="quiz-option-number">{index + 1}</span>
+                    {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
+                    <span className="font-medium text-sm md:text-base">{option.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
           {multiSelect && selected.length > 0 && (
             <button onClick={() => onAnswer(selected)} className="quiz-cta-button mt-6">Continue</button>
           )}
