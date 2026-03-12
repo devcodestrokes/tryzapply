@@ -61,7 +61,6 @@ export const testosteroneLongSteps: QuizStep[] = [
   {
     type: "question",
     question: "When did you start noticing changes to your energy and drive?",
-    image: modelTimeline,
     options: [
       { label: "Over a year ago" },
       { label: "In the past year" },
