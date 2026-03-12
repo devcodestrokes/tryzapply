@@ -139,7 +139,7 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
       {/* Header + Image + Bar stacked with overlaps */}
       <div className="relative">
         {/* Title row overlapping on top of image */}
-        <div className="flex items-start justify-between relative z-20">
+        <div className="flex items-start justify-between relative z-20 mt-4">
           <h2 className="text-xl font-black text-foreground tracking-tight">
             {title}
           </h2>
