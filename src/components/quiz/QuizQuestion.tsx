@@ -49,6 +49,7 @@ const QuizQuestion = ({
   onAnswer,
 }: QuizQuestionProps) => {
   const [selected, setSelected] = useState<number[]>([]);
+  const hasOptionImages = options.some((o) => o.optionImage);
 
   const handleSelect = (index: number) => {
     if (multiSelect) {
