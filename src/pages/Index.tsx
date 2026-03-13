@@ -85,7 +85,13 @@ const Index = () => {
         </p>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8 w-full">
+          <SummaryCard
+            icon={<Eye className="w-4 h-4" />}
+            label="Page Visits"
+            value={totals.page_visits}
+            loading={loading}
+          />
           <SummaryCard
             icon={<Users className="w-4 h-4" />}
             label="Total Starts"
