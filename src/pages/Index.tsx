@@ -63,11 +63,12 @@ const Index = () => {
 
   const totals = analytics.reduce(
     (acc, a) => ({
+      page_visits: acc.page_visits + a.page_visits,
       starts: acc.starts + a.starts,
       completions: acc.completions + a.completions,
       claims: acc.claims + a.claims,
     }),
-    { starts: 0, completions: 0, claims: 0 }
+    { page_visits: 0, starts: 0, completions: 0, claims: 0 }
   );
 
   const completionRate = totals.starts > 0 ? Math.round((totals.completions / totals.starts) * 100) : 0;
