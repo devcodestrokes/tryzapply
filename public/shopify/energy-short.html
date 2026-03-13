@@ -129,6 +129,12 @@ var ICO = {
   activity:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
 };
 
+/* Analytics tracking */
+var ANALYTICS_URL='https://glnnaymhaivqivtpivnb.supabase.co/functions/v1/quiz-analytics';
+var sessionId=crypto.randomUUID();
+var tracked={start:false,complete:false};
+function trackEvent(eventType){fetch(ANALYTICS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,quiz_variant:CONFIG.variant,event_type:eventType})}).catch(function(e){console.error('Track error:',e)})}
+
 var step=0, answers={}, sel=[], rStep=0, rerender=false;
 function render(){var p=Math.round(((step+1)/(STEPS.length+1))*100);document.getElementById('pf').style.width=p+'%';var m=document.getElementById('qm');if(step>=STEPS.length){renderResult(m);return}var s=STEPS[step];if(s.type==='question')renderQuestion(m,s);else if(s.type==='interstitial')renderInterstitial(m,s);else if(s.type==='loading')renderLoading(m)}
 function next(){step++;sel=[];render()}

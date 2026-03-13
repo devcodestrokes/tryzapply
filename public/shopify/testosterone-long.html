@@ -184,6 +184,12 @@ var ICO = {
 /* ============================================================
    QUIZ ENGINE — DO NOT MODIFY BELOW
    ============================================================ */
+/* Analytics tracking */
+var ANALYTICS_URL='https://glnnaymhaivqivtpivnb.supabase.co/functions/v1/quiz-analytics';
+var sessionId=crypto.randomUUID();
+var tracked={start:false,complete:false};
+function trackEvent(eventType){fetch(ANALYTICS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,quiz_variant:CONFIG.variant,event_type:eventType})}).catch(function(e){console.error('Track error:',e)})}
+
 var step=0, answers={}, sel=[], rStep=0, rerender=false;
 
 function render(){
