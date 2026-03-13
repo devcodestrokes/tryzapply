@@ -140,11 +140,11 @@ export const testosteroneShortSteps: QuizStep[] = [
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
     options: [
-      { label: "Energy levels", emoji: "🔋" },
+      { label: "Energy levels", emoji: "😊" },
       { label: "Muscle mass and strength", emoji: "💪" },
-      { label: "Sex drive and performance", emoji: "❤️" },
-      { label: "Mental focus and clarity", emoji: "🧠" },
-      { label: "Weight Loss", emoji: "⚖️" },
+      { label: "Sex drive and performance", emoji: "🍆" },
+      { label: "Mental focus and clarity", emoji: "☁️" },
+      { label: "Weight Loss", emoji: "🧘" },
     ],
   },
   {
