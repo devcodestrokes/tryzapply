@@ -1,14 +1,5 @@
 import type { QuizStep } from "@/components/quiz/QuizEngine";
 import modelAge from "@/assets/quiz/model-age.png";
-import modelEnergy from "@/assets/quiz/model-energy.png";
-import modelCaffeine from "@/assets/quiz/model-caffeine.png";
-import modelBrainfog from "@/assets/quiz/model-brainfog.png";
-import modelDiet from "@/assets/quiz/model-diet.png";
-import modelTimeline from "@/assets/quiz/model-timeline.png";
-import modelGoals from "@/assets/quiz/model-goals.png";
-import modelSleep from "@/assets/quiz/model-sleep.png";
-import modelExercise from "@/assets/quiz/model-exercise.png";
-import modelStress from "@/assets/quiz/model-stress.png";
 
 export const energyLongSteps: QuizStep[] = [
   {
@@ -26,21 +17,21 @@ export const energyLongSteps: QuizStep[] = [
     type: "question",
     question: "What's draining your energy the most right now?",
     options: [
-      { label: "Constant fatigue throughout the day", icon: "battery-low" },
-      { label: "Afternoon energy crashes", icon: "trending-down" },
-      { label: "Poor sleep quality", icon: "moon" },
-      { label: "Brain fog and lack of focus", icon: "brain" },
-      { label: "All of the above", icon: "frown" },
+      { label: "Constant fatigue throughout the day", emoji: "🪫" },
+      { label: "Afternoon energy crashes", emoji: "📉" },
+      { label: "Poor sleep quality", emoji: "🌙" },
+      { label: "Brain fog and lack of focus", emoji: "🧠" },
+      { label: "All of the above", emoji: "😩" },
     ],
   },
   {
     type: "question",
     question: "How many cups of coffee or energy drinks do you rely on daily?",
     options: [
-      { label: "4+ cups - Can't function without it", icon: "coffee" },
-      { label: "2-3 cups - Need the boost", icon: "coffee" },
-      { label: "1 cup - Just to start the day", icon: "coffee" },
-      { label: "None - I avoid caffeine", icon: "ban" },
+      { label: "4+ cups - Can't function without it", emoji: "☕" },
+      { label: "2-3 cups - Need the boost", emoji: "☕" },
+      { label: "1 cup - Just to start the day", emoji: "☕" },
+      { label: "None - I avoid caffeine", emoji: "🚫" },
     ],
   },
   {
@@ -48,10 +39,10 @@ export const energyLongSteps: QuizStep[] = [
     question: "Do you experience brain fog or difficulty concentrating?",
     subtitle: "Especially in the afternoon or after meals.",
     options: [
-      { label: "Yes, constantly" },
-      { label: "Often, several times a week" },
-      { label: "Occasionally" },
-      { label: "Rarely or never" },
+      { label: "Yes, constantly", emoji: "😵‍💫" },
+      { label: "Often, several times a week", emoji: "😮‍💨" },
+      { label: "Occasionally", emoji: "🤔" },
+      { label: "Rarely or never", emoji: "😊" },
     ],
   },
   {
@@ -60,20 +51,20 @@ export const energyLongSteps: QuizStep[] = [
     whyWeAsk:
       "Nutrient deficiencies are one of the leading causes of chronic fatigue. Ultra-processed foods now make up over 50% of the average diet and are linked to significantly lower energy levels.",
     options: [
-      { label: "Mostly processed/fast food" },
-      { label: "Mix of healthy and processed" },
-      { label: "Mostly whole foods" },
-      { label: "Very clean, whole food diet" },
+      { label: "Mostly processed/fast food", emoji: "🍔" },
+      { label: "Mix of healthy and processed", emoji: "🍕" },
+      { label: "Mostly whole foods", emoji: "🥗" },
+      { label: "Very clean, whole food diet", emoji: "🥦" },
     ],
   },
   {
     type: "question",
     question: "When did your energy levels start declining?",
     options: [
-      { label: "Over a year ago" },
-      { label: "In the past year" },
-      { label: "In the past few months" },
-      { label: "I've always had low energy" },
+      { label: "Over a year ago", emoji: "📅" },
+      { label: "In the past year", emoji: "🗓️" },
+      { label: "In the past few months", emoji: "🕐" },
+      { label: "I've always had low energy", emoji: "😔" },
     ],
   },
   {
@@ -82,11 +73,11 @@ export const energyLongSteps: QuizStep[] = [
     subtitle: "(Choose all that apply)",
     multiSelect: true,
     options: [
-      { label: "Being more productive at work" },
-      { label: "Having energy for workouts" },
-      { label: "Being present with family" },
-      { label: "Feeling like myself again" },
-      { label: "All of the above" },
+      { label: "Being more productive at work", emoji: "💼" },
+      { label: "Having energy for workouts", emoji: "🏋️" },
+      { label: "Being present with family", emoji: "👨‍👩‍👧‍👦" },
+      { label: "Feeling like myself again", emoji: "🙌" },
+      { label: "All of the above", emoji: "✅" },
     ],
   },
   {
@@ -99,20 +90,20 @@ export const energyLongSteps: QuizStep[] = [
     type: "question",
     question: "How many hours of quality sleep do you get per night?",
     options: [
-      { label: "Less than 5 hours" },
-      { label: "5-6 hours" },
-      { label: "7-8 hours" },
-      { label: "More than 8 hours" },
+      { label: "Less than 5 hours", emoji: "😴" },
+      { label: "5-6 hours", emoji: "🌙" },
+      { label: "7-8 hours", emoji: "😌" },
+      { label: "More than 8 hours", emoji: "😊" },
     ],
   },
   {
     type: "question",
     question: "Do you exercise regularly?",
     options: [
-      { label: "No, I'm too tired" },
-      { label: "Occasionally, when I have energy" },
-      { label: "2-3 times per week" },
-      { label: "4+ times per week" },
+      { label: "No, I'm too tired", emoji: "😮‍💨" },
+      { label: "Occasionally, when I have energy", emoji: "🚶" },
+      { label: "2-3 times per week", emoji: "🏃" },
+      { label: "4+ times per week", emoji: "💪" },
     ],
   },
   {
@@ -121,9 +112,9 @@ export const energyLongSteps: QuizStep[] = [
     whyWeAsk:
       "These conditions share similar root causes with chronic fatigue — insulin resistance, inflammation, and nutrient deficiencies. Family patterns help us identify your risk factors.",
     options: [
-      { label: "Yes" },
-      { label: "No" },
-      { label: "Not Sure" },
+      { label: "Yes", emoji: "✅" },
+      { label: "No", emoji: "❌" },
+      { label: "Not Sure", emoji: "🤷" },
     ],
   },
   {
@@ -147,21 +138,21 @@ export const energyShortSteps: QuizStep[] = [
     type: "question",
     question: "What's draining your energy the most right now?",
     options: [
-      { label: "Constant fatigue throughout the day", icon: "battery-low" },
-      { label: "Afternoon energy crashes", icon: "trending-down" },
-      { label: "Poor sleep quality", icon: "moon" },
-      { label: "Brain fog and lack of focus", icon: "brain" },
-      { label: "All of the above", icon: "frown" },
+      { label: "Constant fatigue throughout the day", emoji: "🪫" },
+      { label: "Afternoon energy crashes", emoji: "📉" },
+      { label: "Poor sleep quality", emoji: "🌙" },
+      { label: "Brain fog and lack of focus", emoji: "🧠" },
+      { label: "All of the above", emoji: "😩" },
     ],
   },
   {
     type: "question",
     question: "How many cups of coffee or energy drinks do you rely on daily?",
     options: [
-      { label: "4+ cups - Can't function without it", icon: "coffee" },
-      { label: "2-3 cups - Need the boost", icon: "coffee" },
-      { label: "1 cup - Just to start the day", icon: "coffee" },
-      { label: "None - I avoid caffeine", icon: "ban" },
+      { label: "4+ cups - Can't function without it", emoji: "☕" },
+      { label: "2-3 cups - Need the boost", emoji: "☕" },
+      { label: "1 cup - Just to start the day", emoji: "☕" },
+      { label: "None - I avoid caffeine", emoji: "🚫" },
     ],
   },
   {
@@ -170,11 +161,11 @@ export const energyShortSteps: QuizStep[] = [
     subtitle: "(Choose all that apply)",
     multiSelect: true,
     options: [
-      { label: "Being more productive at work" },
-      { label: "Having energy for workouts" },
-      { label: "Being present with family" },
-      { label: "Feeling like myself again" },
-      { label: "All of the above" },
+      { label: "Being more productive at work", emoji: "💼" },
+      { label: "Having energy for workouts", emoji: "🏋️" },
+      { label: "Being present with family", emoji: "👨‍👩‍👧‍👦" },
+      { label: "Feeling like myself again", emoji: "🙌" },
+      { label: "All of the above", emoji: "✅" },
     ],
   },
   {

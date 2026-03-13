@@ -1,18 +1,5 @@
 import type { QuizStep } from "@/components/quiz/QuizEngine";
 import modelAge from "@/assets/quiz/model-age.png";
-import modelMuscle from "@/assets/quiz/model-muscle.png";
-import modelStress from "@/assets/quiz/model-stress.png";
-import modelEnergy from "@/assets/quiz/model-energy.png";
-import modelTimeline from "@/assets/quiz/model-timeline.png";
-import modelGoals from "@/assets/quiz/model-goals.png";
-import modelBody from "@/assets/quiz/model-body.png";
-import bodyLean from "@/assets/quiz/body-lean.png";
-import bodyAverage from "@/assets/quiz/body-average.png";
-import bodySoft from "@/assets/quiz/body-soft.png";
-import bodyHeavy from "@/assets/quiz/body-heavy.png";
-import modelSleep from "@/assets/quiz/model-sleep.png";
-import modelDiet from "@/assets/quiz/model-diet.png";
-import modelBrainfog from "@/assets/quiz/model-brainfog.png";
 import beforeAfter1 from "@/assets/quiz/before-after.png";
 import beforeAfter2 from "@/assets/quiz/before-after-2.png";
 import beforeAfter3 from "@/assets/quiz/before-after-3.png";
@@ -33,11 +20,11 @@ export const testosteroneLongSteps: QuizStep[] = [
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
     options: [
-      { label: "Energy levels", icon: "battery" },
-      { label: "Muscle mass and strength", icon: "dumbbell" },
-      { label: "Sex drive and performance", icon: "heart" },
-      { label: "Mental focus and clarity", icon: "brain" },
-      { label: "Weight Loss", icon: "scale" },
+      { label: "Energy levels", emoji: "🔋" },
+      { label: "Muscle mass and strength", emoji: "💪" },
+      { label: "Sex drive and performance", emoji: "❤️" },
+      { label: "Mental focus and clarity", emoji: "🧠" },
+      { label: "Weight Loss", emoji: "⚖️" },
     ],
   },
   {
@@ -45,28 +32,28 @@ export const testosteroneLongSteps: QuizStep[] = [
     question: "Do you have stress symptoms during the day?",
     subtitle: "Like feeling tired, cranky, foggy, or moody.",
     options: [
-      { label: "Yes" },
-      { label: "No" },
+      { label: "Yes", emoji: "😩" },
+      { label: "No", emoji: "😊" },
     ],
   },
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
     options: [
-      { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
-      { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
-      { label: "Slightly tired - Still functional but slower", icon: "wind" },
-      { label: "Same energy - No afternoon crash", icon: "zap" },
+      { label: "Completely drained - Need caffeine or a nap", emoji: "🪫" },
+      { label: "Noticeably lower - Afternoon slump hits hard", emoji: "📉" },
+      { label: "Slightly tired - Still functional but slower", emoji: "😮‍💨" },
+      { label: "Same energy - No afternoon crash", emoji: "⚡" },
     ],
   },
   {
     type: "question",
     question: "When did you start noticing changes to your energy and drive?",
     options: [
-      { label: "Over a year ago" },
-      { label: "In the past year" },
-      { label: "In the past few months" },
-      { label: "Not sure" },
+      { label: "Over a year ago", emoji: "📅" },
+      { label: "In the past year", emoji: "🗓️" },
+      { label: "In the past few months", emoji: "🕐" },
+      { label: "Not sure", emoji: "🤔" },
     ],
   },
   {
@@ -75,11 +62,11 @@ export const testosteroneLongSteps: QuizStep[] = [
     subtitle: "(Choose all that apply)",
     multiSelect: true,
     options: [
-      { label: "Higher energy that lasts all day" },
-      { label: "Increased muscle mass and strength" },
-      { label: "Better sex drive and performance" },
-      { label: "Improved mental clarity and focus" },
-      { label: "All of the above" },
+      { label: "Higher energy that lasts all day", emoji: "⚡" },
+      { label: "Increased muscle mass and strength", emoji: "💪" },
+      { label: "Better sex drive and performance", emoji: "🔥" },
+      { label: "Improved mental clarity and focus", emoji: "🧠" },
+      { label: "All of the above", emoji: "✅" },
     ],
   },
   {
@@ -93,20 +80,20 @@ export const testosteroneLongSteps: QuizStep[] = [
     type: "question",
     question: "How would you describe your current body composition?",
     options: [
-      { label: "Lean and muscular" },
-      { label: "Average build" },
-      { label: "Soft with some muscle" },
-      { label: "Overweight/out of shape" },
+      { label: "Lean and muscular", emoji: "💪" },
+      { label: "Average build", emoji: "🧍" },
+      { label: "Soft with some muscle", emoji: "🫠" },
+      { label: "Overweight/out of shape", emoji: "😓" },
     ],
   },
   {
     type: "question",
     question: "How many hours of quality sleep do you get per night?",
     options: [
-      { label: "Less than 5 hours" },
-      { label: "5-6 hours" },
-      { label: "7-8 hours" },
-      { label: "More than 8 hours" },
+      { label: "Less than 5 hours", emoji: "😴" },
+      { label: "5-6 hours", emoji: "🌙" },
+      { label: "7-8 hours", emoji: "😌" },
+      { label: "More than 8 hours", emoji: "😊" },
     ],
   },
   {
@@ -115,9 +102,9 @@ export const testosteroneLongSteps: QuizStep[] = [
     whyWeAsk:
       "These conditions share similar root causes with low testosterone — insulin resistance, inflammation, and metabolic dysfunction. Family patterns help us identify your risk factors.",
     options: [
-      { label: "Yes" },
-      { label: "No" },
-      { label: "Not Sure" },
+      { label: "Yes", emoji: "✅" },
+      { label: "No", emoji: "❌" },
+      { label: "Not Sure", emoji: "🤷" },
     ],
   },
   {
@@ -126,10 +113,10 @@ export const testosteroneLongSteps: QuizStep[] = [
     whyWeAsk:
       "Processed foods contain chemicals and additives that disrupt hormone production. Ultra-processed foods are linked to lower testosterone levels in multiple studies.",
     options: [
-      { label: "Daily - Most meals include processed foods" },
-      { label: "Several times a week" },
-      { label: "Occasionally - Mostly whole foods" },
-      { label: "Rarely - I avoid processed foods" },
+      { label: "Daily - Most meals include processed foods", emoji: "🍔" },
+      { label: "Several times a week", emoji: "🍕" },
+      { label: "Occasionally - Mostly whole foods", emoji: "🥗" },
+      { label: "Rarely - I avoid processed foods", emoji: "🥦" },
     ],
   },
   {
@@ -153,21 +140,21 @@ export const testosteroneShortSteps: QuizStep[] = [
     type: "question",
     question: "What's your biggest concern about your masculine health right now?",
     options: [
-      { label: "Energy levels", icon: "battery" },
-      { label: "Muscle mass and strength", icon: "dumbbell" },
-      { label: "Sex drive and performance", icon: "heart" },
-      { label: "Mental focus and clarity", icon: "brain" },
-      { label: "Weight Loss", icon: "scale" },
+      { label: "Energy levels", emoji: "🔋" },
+      { label: "Muscle mass and strength", emoji: "💪" },
+      { label: "Sex drive and performance", emoji: "❤️" },
+      { label: "Mental focus and clarity", emoji: "🧠" },
+      { label: "Weight Loss", emoji: "⚖️" },
     ],
   },
   {
     type: "question",
     question: "How's your energy at 3pm compared to when you wake up?",
     options: [
-      { label: "Completely drained - Need caffeine or a nap", icon: "battery-low" },
-      { label: "Noticeably lower - Afternoon slump hits hard", icon: "trending-down" },
-      { label: "Slightly tired - Still functional but slower", icon: "wind" },
-      { label: "Same energy - No afternoon crash", icon: "zap" },
+      { label: "Completely drained - Need caffeine or a nap", emoji: "🪫" },
+      { label: "Noticeably lower - Afternoon slump hits hard", emoji: "📉" },
+      { label: "Slightly tired - Still functional but slower", emoji: "😮‍💨" },
+      { label: "Same energy - No afternoon crash", emoji: "⚡" },
     ],
   },
   {
@@ -176,11 +163,11 @@ export const testosteroneShortSteps: QuizStep[] = [
     subtitle: "(Choose all that apply)",
     multiSelect: true,
     options: [
-      { label: "Higher energy that lasts all day" },
-      { label: "Increased muscle mass and strength" },
-      { label: "Better sex drive and performance" },
-      { label: "Improved mental clarity and focus" },
-      { label: "All of the above" },
+      { label: "Higher energy that lasts all day", emoji: "⚡" },
+      { label: "Increased muscle mass and strength", emoji: "💪" },
+      { label: "Better sex drive and performance", emoji: "🔥" },
+      { label: "Improved mental clarity and focus", emoji: "🧠" },
+      { label: "All of the above", emoji: "✅" },
     ],
   },
   {
