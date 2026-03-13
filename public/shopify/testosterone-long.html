@@ -206,6 +206,7 @@ function render(){
 function next(){step++;sel=[];render()}
 
 function handleSel(idx){
+  if(step===0&&!tracked.start){tracked.start=true;trackEvent('quiz_start')}
   var s=STEPS[step];
   if(s.multiSelect){
     var i=sel.indexOf(idx);
