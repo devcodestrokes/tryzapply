@@ -31,7 +31,12 @@ const QuizInterstitial = ({
       <div className="text-4xl mb-4">💪</div>
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">{title}</h2>
       {subtitle && (
-        <p className="text-muted-foreground text-sm md:text-base mb-6">{subtitle}</p>
+        <p className="text-muted-foreground text-sm md:text-base mb-4">{subtitle}</p>
+      )}
+      {image && (
+        <div className="flex justify-center mb-6">
+          <img src={image} alt="Before and after transformation" className="max-h-72 md:max-h-96 w-auto rounded-xl object-contain" />
+        </div>
       )}
       {showContinue && (
         <button onClick={onContinue} className="quiz-cta-button">
