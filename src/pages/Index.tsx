@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchQuizAnalytics, type QuizAnalytics } from "@/lib/analytics";
-import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye } from "lucide-react";
+import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
 
 const VARIANT_LABELS: Record<string, { title: string; tag: string }> = {
   "testosterone-long": { title: "Testosterone Focus — Long", tag: "Testosterone" },
@@ -85,7 +85,7 @@ const Index = () => {
         </p>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8 w-full">
           <SummaryCard
             icon={<Eye className="w-4 h-4" />}
             label="Page Visits"
@@ -114,6 +114,12 @@ const Index = () => {
             icon={<BarChart3 className="w-4 h-4" />}
             label="Completion Rate"
             value={`${completionRate}%`}
+            loading={loading}
+          />
+          <SummaryCard
+            icon={<TrendingUp className="w-4 h-4" />}
+            label="Conversion Rate"
+            value={`${claimRate}%`}
             loading={loading}
           />
         </div>
