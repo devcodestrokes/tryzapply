@@ -54,10 +54,15 @@ const QuizEngine = ({
   const trackedRef = useRef({ start: false, complete: false });
 
   const totalSteps = steps.length;
-  const progress = currentStep < 0 ? 0 : Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
+  const progress = Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
 
   const handleAnswer = useCallback(
     (selected: number[]) => {
+      // Track quiz start on first answer
+      if (currentStep === 0 && !trackedRef.current.start) {
+        trackedRef.current.start = true;
+        trackQuizEvent(sessionIdRef.current, variant, "quiz_start");
+      }
       setAnswers((prev) => ({ ...prev, [currentStep]: selected }));
       setCurrentStep((prev) => {
         const next = prev + 1;
@@ -74,12 +79,6 @@ const QuizEngine = ({
   const handleContinue = useCallback(() => {
     setCurrentStep((prev) => {
       const next = prev + 1;
-      // Track quiz start when moving from intro to first step
-      if (prev === -1 && !trackedRef.current.start) {
-        trackedRef.current.start = true;
-        trackQuizEvent(sessionIdRef.current, variant, "quiz_start");
-      }
-      // Track quiz complete when reaching results
       if (next >= steps.length && !trackedRef.current.complete) {
         trackedRef.current.complete = true;
         trackQuizEvent(sessionIdRef.current, variant, "quiz_complete");
@@ -94,22 +93,6 @@ const QuizEngine = ({
   };
 
   const renderStep = () => {
-    // Intro screen
-    if (currentStep === -1) {
-      return (
-        <div className="w-fit animate-in fade-in slide-in-from-bottom-4 duration-400 mx-auto">
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-foreground">
-            {headline}
-          </h1>
-          <p className="text-center text-muted-foreground text-sm md:text-base mb-6 flex items-center justify-center gap-2">
-            <img src="/tick-icon.svg" alt="" className="w-3 h-3" />
-            {headlineSubtitle}
-          </p>
-          <QuizTestimonial quote={testimonial.quote} name={testimonial.name} />
-        </div>
-      );
-    }
-
     // Result screen
     if (currentStep >= totalSteps) {
       return <QuizResult focus={focus} answers={answers} steps={steps} onClaim={handleClaim} />;
@@ -120,16 +103,30 @@ const QuizEngine = ({
     switch (step.type) {
       case "question":
         return (
-          <QuizQuestion
-            key={currentStep}
-            question={step.question!}
-            subtitle={step.subtitle}
-            options={step.options!}
-            multiSelect={step.multiSelect}
-            whyWeAsk={step.whyWeAsk}
-            image={step.image}
-            onAnswer={handleAnswer}
-          />
+          <div className="w-full flex flex-col">
+            {currentStep === 0 && (
+              <div className="w-fit animate-in fade-in slide-in-from-bottom-4 duration-400 mx-auto mb-6">
+                <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-foreground">
+                  {headline}
+                </h1>
+                <p className="text-center text-muted-foreground text-sm md:text-base mb-4 flex items-center justify-center gap-2">
+                  <img src="/tick-icon.svg" alt="" className="w-3 h-3" />
+                  {headlineSubtitle}
+                </p>
+                <QuizTestimonial quote={testimonial.quote} name={testimonial.name} />
+              </div>
+            )}
+            <QuizQuestion
+              key={currentStep}
+              question={step.question!}
+              subtitle={step.subtitle}
+              options={step.options!}
+              multiSelect={step.multiSelect}
+              whyWeAsk={step.whyWeAsk}
+              image={currentStep === 0 ? undefined : step.image}
+              onAnswer={handleAnswer}
+            />
+          </div>
         );
       case "interstitial":
         return (
@@ -152,15 +149,8 @@ const QuizEngine = ({
   };
 
   return (
-    <QuizLayout progress={currentStep >= 0 ? progress : undefined}>
+    <QuizLayout progress={progress}>
       {renderStep()}
-      {currentStep === -1 && (
-        <div className="w-full mt-2">
-          <button onClick={handleContinue} className="quiz-cta-button">
-            Start Assessment
-          </button>
-        </div>
-      )}
     </QuizLayout>
   );
 };
