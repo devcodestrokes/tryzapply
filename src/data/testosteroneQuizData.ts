@@ -93,10 +93,10 @@ export const testosteroneLongSteps: QuizStep[] = [
     type: "question",
     question: "How would you describe your current body composition?",
     options: [
-      { label: "Lean and muscular", optionImage: bodyLean },
-      { label: "Average build", optionImage: bodyAverage },
-      { label: "Soft with some muscle", optionImage: bodySoft },
-      { label: "Overweight/out of shape", optionImage: bodyHeavy },
+      { label: "Lean and muscular" },
+      { label: "Average build" },
+      { label: "Soft with some muscle" },
+      { label: "Overweight/out of shape" },
     ],
   },
   {
