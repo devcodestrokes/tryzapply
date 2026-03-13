@@ -144,7 +144,7 @@ function render(){
   var p=Math.round(((step+1)/(STEPS.length+1))*100);
   document.getElementById('pf').style.width=p+'%';
   var m=document.getElementById('qm');
-  if(step>=STEPS.length){renderResult(m);return}
+  if(step>=STEPS.length){if(!tracked.complete){tracked.complete=true;trackEvent('quiz_complete')}renderResult(m);return}
   var s=STEPS[step];
   if(s.type==='question')renderQuestion(m,s);
   else if(s.type==='interstitial')renderInterstitial(m,s);
