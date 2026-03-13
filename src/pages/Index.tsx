@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchQuizAnalytics, type QuizAnalytics } from "@/lib/analytics";
-import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw } from "lucide-react";
+import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye } from "lucide-react";
 
 const VARIANT_LABELS: Record<string, { title: string; tag: string }> = {
   "testosterone-long": { title: "Testosterone Focus — Long", tag: "Testosterone" },
@@ -58,16 +58,17 @@ const Index = () => {
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
-    return found || { starts: 0, completions: 0, claims: 0 };
+    return found || { page_visits: 0, starts: 0, completions: 0, claims: 0 };
   };
 
   const totals = analytics.reduce(
     (acc, a) => ({
+      page_visits: acc.page_visits + a.page_visits,
       starts: acc.starts + a.starts,
       completions: acc.completions + a.completions,
       claims: acc.claims + a.claims,
     }),
-    { starts: 0, completions: 0, claims: 0 }
+    { page_visits: 0, starts: 0, completions: 0, claims: 0 }
   );
 
   const completionRate = totals.starts > 0 ? Math.round((totals.completions / totals.starts) * 100) : 0;
@@ -84,7 +85,13 @@ const Index = () => {
         </p>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8 w-full">
+          <SummaryCard
+            icon={<Eye className="w-4 h-4" />}
+            label="Page Visits"
+            value={totals.page_visits}
+            loading={loading}
+          />
           <SummaryCard
             icon={<Users className="w-4 h-4" />}
             label="Total Starts"
@@ -145,6 +152,7 @@ const Index = () => {
 
                   {/* Inline Stats */}
                   <div className="flex gap-4 mt-2 text-xs">
+                    <StatBadge label="Visits" value={stats.page_visits} loading={loading} />
                     <StatBadge label="Starts" value={stats.starts} loading={loading} />
                     <StatBadge label="Completed" value={stats.completions} loading={loading} />
                     <StatBadge label="Claims" value={stats.claims} loading={loading} />

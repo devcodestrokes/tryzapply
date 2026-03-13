@@ -52,7 +52,15 @@ const QuizEngine = ({
   const [currentStep, setCurrentStep] = useState(0); // start at first question
   const [answers, setAnswers] = useState<Record<number, number[]>>({});
   const sessionIdRef = useRef(generateSessionId());
-  const trackedRef = useRef({ start: false, complete: false });
+  const trackedRef = useRef({ pageVisited: false, start: false, complete: false });
+
+  // Track page visit on mount
+  useEffect(() => {
+    if (!trackedRef.current.pageVisited) {
+      trackedRef.current.pageVisited = true;
+      trackQuizEvent(sessionIdRef.current, variant, "page_visited");
+    }
+  }, [variant]);
 
   // Preload the report image early so it's cached when results show
   useEffect(() => {
