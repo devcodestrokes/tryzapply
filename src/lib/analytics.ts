@@ -5,7 +5,7 @@ export function generateSessionId(): string {
   return crypto.randomUUID();
 }
 
-export type QuizEventType = "quiz_start" | "quiz_complete" | "claim";
+export type QuizEventType = "page_visited" | "quiz_start" | "quiz_complete" | "claim";
 
 export async function trackQuizEvent(
   sessionId: string,
