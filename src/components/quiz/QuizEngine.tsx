@@ -136,6 +136,7 @@ const QuizEngine = ({
             key={currentStep}
             title={step.title!}
             subtitle={step.interstitialSubtitle}
+            image={step.interstitialImage}
             autoAdvance={step.autoAdvance}
             autoAdvanceMs={step.autoAdvanceMs}
             onContinue={handleContinue}
