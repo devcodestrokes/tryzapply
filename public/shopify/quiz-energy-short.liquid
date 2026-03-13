@@ -227,16 +227,56 @@ function renderProduct(m){var isTesto=CONFIG.focus==='testosterone';var h='<div 
 
 <script>
 (function() {
-  function cleanTheme() {
-    ['.page__title','.page-title','.main-page-title','.breadcrumb','.breadcrumbs'].forEach(function(s) {
-      document.querySelectorAll(s).forEach(function(el) { el.style.display='none'; });
+  function fullTakeover() {
+    /* Hide every sibling section */
+    var quizRoot = document.getElementById('quiz-root');
+    if (!quizRoot) return;
+    var quizSection = quizRoot.closest('.shopify-section');
+    if (quizSection) {
+      var allSections = document.querySelectorAll('.shopify-section');
+      allSections.forEach(function(s) {
+        if (s !== quizSection) {
+          s.style.display = 'none';
+          s.style.visibility = 'hidden';
+        }
+      });
+    }
+    /* Hide common theme elements by tag/class/id */
+    var hideSelectors = [
+      'header', 'footer', 'nav',
+      '.header', '.footer', '.site-header', '.site-footer',
+      '.header-wrapper', '.footer-wrapper',
+      '#header', '#footer',
+      '.announcement-bar', '[class*="announcement"]', '[id*="announcement"]',
+      '.page__title', '.page-title', '.main-page-title',
+      '.breadcrumb', '.breadcrumbs',
+      '[class*="cookie"]', '[id*="cookie"]',
+      '.shopify-section-group-header-group',
+      '.shopify-section-group-footer-group'
+    ];
+    hideSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        if (!el.contains(quizRoot)) {
+          el.style.display = 'none';
+          el.style.visibility = 'hidden';
+        }
+      });
     });
-    document.querySelectorAll('#MainContent,main,.page__content').forEach(function(el) {
-      el.style.padding='0'; el.style.margin='0'; el.style.maxWidth='100%';
+    /* Reset parent containers */
+    document.querySelectorAll('#MainContent,main,.main-content,.page__content,.page-width').forEach(function(el) {
+      el.style.padding = '0';
+      el.style.margin = '0';
+      el.style.maxWidth = '100%';
+      el.style.width = '100%';
     });
+    /* Prevent body scrolling behind the fixed quiz */
+    document.body.style.overflow = 'hidden';
   }
-  cleanTheme();
-  document.addEventListener('DOMContentLoaded', cleanTheme);
+  fullTakeover();
+  document.addEventListener('DOMContentLoaded', fullTakeover);
+  /* Run again after a short delay for themes that render late */
+  setTimeout(fullTakeover, 500);
+  setTimeout(fullTakeover, 1500);
 })();
 </script>
 
