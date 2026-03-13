@@ -13,6 +13,7 @@ interface QuizInterstitialProps {
 const QuizInterstitial = ({
   title,
   subtitle,
+  image,
   autoAdvance = false,
   autoAdvanceMs = 2000,
   showContinue = true,
