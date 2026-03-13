@@ -156,9 +156,14 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
             <img
               src={reportMan}
               alt="Assessment subject"
-              className="w-72 sm:w-52 lg:w-96 h-auto object-contain"
+              className={`w-72 sm:w-52 lg:w-96 h-auto object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              loading="eager"
+              decoding="async"
+              onLoad={() => setImageLoaded(true)}
             />
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+            {!imageLoaded && (
+              <div className="w-72 sm:w-52 lg:w-96 h-64 bg-muted/30 rounded-xl animate-pulse" />
+            )}
           </div>
         </div>
 
