@@ -3,6 +3,7 @@ import { useEffect } from "react";
 interface QuizInterstitialProps {
   title: string;
   subtitle?: string;
+  image?: string;
   autoAdvance?: boolean;
   autoAdvanceMs?: number;
   showContinue?: boolean;
