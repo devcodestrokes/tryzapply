@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import QuizLayout from "./QuizLayout";
 import QuizQuestion from "./QuizQuestion";
 import type { QuizOption } from "./QuizQuestion";
@@ -7,6 +7,7 @@ import QuizLoading from "./QuizLoading";
 import QuizResult from "./QuizResult";
 import QuizTestimonial from "./QuizTestimonial";
 import { generateSessionId, trackQuizEvent } from "@/lib/analytics";
+import reportMan from "@/assets/report-man.png";
 
 export type QuizStepType = "question" | "interstitial" | "loading" | "result";
 
@@ -52,6 +53,12 @@ const QuizEngine = ({
   const [answers, setAnswers] = useState<Record<number, number[]>>({});
   const sessionIdRef = useRef(generateSessionId());
   const trackedRef = useRef({ start: false, complete: false });
+
+  // Preload the report image early so it's cached when results show
+  useEffect(() => {
+    const img = new Image();
+    img.src = reportMan;
+  }, []);
 
   const totalSteps = steps.length;
   const progress = Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
