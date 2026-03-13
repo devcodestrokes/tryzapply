@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchQuizAnalytics, type QuizAnalytics } from "@/lib/analytics";
-import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye } from "lucide-react";
+import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
 
 const VARIANT_LABELS: Record<string, { title: string; tag: string }> = {
   "testosterone-long": { title: "Testosterone Focus — Long", tag: "Testosterone" },
