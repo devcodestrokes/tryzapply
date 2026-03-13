@@ -154,7 +154,7 @@ var tracked={start:false,complete:false};
 function trackEvent(eventType){fetch(ANALYTICS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,quiz_variant:CONFIG.variant,event_type:eventType})}).catch(function(e){console.error('Track error:',e)})}
 
 var step=0, answers={}, sel=[], rStep=0, rerender=false;
-function render(){var p=Math.round(((step+1)/(STEPS.length+1))*100);document.getElementById('pf').style.width=p+'%';var m=document.getElementById('qm');if(step>=STEPS.length){renderResult(m);return}var s=STEPS[step];if(s.type==='question')renderQuestion(m,s);else if(s.type==='interstitial')renderInterstitial(m,s);else if(s.type==='loading')renderLoading(m)}
+function render(){var p=Math.round(((step+1)/(STEPS.length+1))*100);document.getElementById('pf').style.width=p+'%';var m=document.getElementById('qm');if(step>=STEPS.length){if(!tracked.complete){tracked.complete=true;trackEvent('quiz_complete')}renderResult(m);return}var s=STEPS[step];if(s.type==='question')renderQuestion(m,s);else if(s.type==='interstitial')renderInterstitial(m,s);else if(s.type==='loading')renderLoading(m)}
 function next(){step++;sel=[];render()}
 function handleSel(idx){if(step===0&&!tracked.start){tracked.start=true;trackEvent('quiz_start')}var s=STEPS[step];if(s.multiSelect){var i=sel.indexOf(idx);if(i>=0)sel.splice(i,1);else sel.push(idx);rerender=true;render();rerender=false}else{sel=[idx];answers[step]=[idx];document.querySelectorAll('[data-o]').forEach(function(e){e.classList.remove('sel')});var el=document.querySelector('[data-o="'+idx+'"]');if(el)el.classList.add('sel');setTimeout(function(){next()},300)}}
 function submitMulti(){answers[step]=[].concat(sel);next()}
