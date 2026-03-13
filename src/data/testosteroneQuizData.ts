@@ -85,6 +85,7 @@ export const testosteroneLongSteps: QuizStep[] = [
     title: "You are in the right place! 💪",
     interstitialSubtitle:
       "Over 429,576 men have reclaimed their T, drive, and physique thanks to our NEW Scientific, Natural T-Revival System!",
+    interstitialImage: beforeAfter,
   },
   {
     type: "question",
