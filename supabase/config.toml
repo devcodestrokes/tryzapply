@@ -1,1 +1,4 @@
 project_id = "glnnaymhaivqivtpivnb"
+
+[functions.quiz-analytics]
+verify_jwt = false
