@@ -48,7 +48,7 @@ const QuizEngine = ({
   headlineSubtitle,
   testimonial,
 }: QuizEngineProps) => {
-  const [currentStep, setCurrentStep] = useState(-1); // -1 = intro
+  const [currentStep, setCurrentStep] = useState(0); // start at first question
   const [answers, setAnswers] = useState<Record<number, number[]>>({});
   const sessionIdRef = useRef(generateSessionId());
   const trackedRef = useRef({ start: false, complete: false });
