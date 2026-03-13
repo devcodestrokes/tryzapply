@@ -22,6 +22,7 @@ export interface QuizStep {
   // For interstitial type
   title?: string;
   interstitialSubtitle?: string;
+  interstitialImage?: string;
   autoAdvance?: boolean;
   autoAdvanceMs?: number;
 }
