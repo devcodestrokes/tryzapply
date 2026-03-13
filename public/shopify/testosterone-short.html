@@ -152,6 +152,7 @@ function render(){
 }
 function next(){step++;sel=[];render()}
 function handleSel(idx){
+  if(step===0&&!tracked.start){tracked.start=true;trackEvent('quiz_start')}
   var s=STEPS[step];
   if(s.multiSelect){var i=sel.indexOf(idx);if(i>=0)sel.splice(i,1);else sel.push(idx);rerender=true;render();rerender=false}
   else{sel=[idx];answers[step]=[idx];document.querySelectorAll('[data-o]').forEach(function(e){e.classList.remove('sel')});var el=document.querySelector('[data-o="'+idx+'"]');if(el)el.classList.add('sel');setTimeout(function(){next()},300)}
