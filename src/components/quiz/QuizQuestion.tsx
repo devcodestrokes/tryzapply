@@ -92,7 +92,8 @@ const QuizQuestion = ({
                     className={`quiz-option ${selected.includes(index) ? "quiz-option-selected" : ""}`}
                   >
                     <span className="quiz-option-number">{index + 1}</span>
-                    {IconComp && <IconComp className="w-5 h-5 shrink-0" />}
+                    {option.emoji && <span className="text-lg shrink-0">{option.emoji}</span>}
+                    {!option.emoji && IconComp && <IconComp className="w-5 h-5 shrink-0" />}
                     <span className="font-medium text-sm md:text-base">{option.label}</span>
                   </button>
                 );
