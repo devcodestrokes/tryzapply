@@ -12,40 +12,60 @@
 
 <style>
 /* ═══════════════════════════════════════════════════
-   FULL-WIDTH QUIZ — overrides Shopify page container
+   FULL-TAKEOVER QUIZ — hides ALL Shopify theme chrome
    ═══════════════════════════════════════════════════ */
-#shopify-section-quiz-energy-long {
-  display: block !important;
+#shopify-section-header,
+#shopify-section-footer,
+.shopify-section-header,
+.shopify-section-footer,
+.shopify-section-group-header-group,
+.shopify-section-group-footer-group,
+.announcement-bar,
+.announcement-bar-section,
+[class*="announcement"],
+[id*="announcement"],
+header,
+.header,
+.site-header,
+.header-wrapper,
+#header,
+footer,
+.footer,
+.site-footer,
+.footer-wrapper,
+#footer,
+nav.breadcrumb,
+.breadcrumbs,
+.breadcrumb,
+.page__title,
+.page-title,
+.main-page-title,
+.page__hero,
+[class*="cookie"],
+[id*="cookie"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#quiz-root {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100vw !important;
-  max-width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  height: 100dvh !important;
+  z-index: 99999 !important;
+  background: #fff !important;
 }
-#shopify-section-quiz-energy-long .quiz-wrap {
-  width: 100% !important;
-  min-height: 100dvh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-main#MainContent, #MainContent, .main-content {
+main#MainContent, #MainContent, .main-content, .page-width,
+.template-page, .page__content, .shopify-section, .main-content-wrapper {
   padding: 0 !important;
   margin: 0 !important;
   max-width: 100% !important;
   width: 100% !important;
-}
-.main-page-title, .page__title, .page-title,
-.breadcrumb, .breadcrumbs {
-  display: none !important;
-}
-body:has(#shopify-section-quiz-energy-long) .shopify-section:not(#shopify-section-quiz-energy-long) {
-  display: none !important;
-}
-body:has(#shopify-section-quiz-energy-long) footer,
-body:has(#shopify-section-quiz-energy-long) .footer {
-  display: none !important;
+  overflow: visible !important;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -219,16 +239,39 @@ function renderProduct(m){var isTesto=CONFIG.focus==='testosterone';var h='<div 
 
 <script>
 (function() {
-  function cleanTheme() {
-    ['.page__title','.page-title','.main-page-title','.breadcrumb','.breadcrumbs'].forEach(function(s) {
-      document.querySelectorAll(s).forEach(function(el) { el.style.display='none'; });
+  function fullTakeover() {
+    var quizRoot = document.getElementById('quiz-root');
+    if (!quizRoot) return;
+    var quizSection = quizRoot.closest('.shopify-section');
+    if (quizSection) {
+      document.querySelectorAll('.shopify-section').forEach(function(s) {
+        if (s !== quizSection) { s.style.display = 'none'; s.style.visibility = 'hidden'; }
+      });
+    }
+    var hideSelectors = [
+      'header', 'footer', 'nav',
+      '.header', '.footer', '.site-header', '.site-footer',
+      '.header-wrapper', '.footer-wrapper', '#header', '#footer',
+      '.announcement-bar', '[class*="announcement"]', '[id*="announcement"]',
+      '.page__title', '.page-title', '.main-page-title',
+      '.breadcrumb', '.breadcrumbs',
+      '[class*="cookie"]', '[id*="cookie"]',
+      '.shopify-section-group-header-group', '.shopify-section-group-footer-group'
+    ];
+    hideSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        if (!el.contains(quizRoot)) { el.style.display = 'none'; el.style.visibility = 'hidden'; }
+      });
     });
-    document.querySelectorAll('#MainContent,main,.page__content').forEach(function(el) {
-      el.style.padding='0'; el.style.margin='0'; el.style.maxWidth='100%';
+    document.querySelectorAll('#MainContent,main,.main-content,.page__content,.page-width').forEach(function(el) {
+      el.style.padding = '0'; el.style.margin = '0'; el.style.maxWidth = '100%'; el.style.width = '100%';
     });
+    document.body.style.overflow = 'hidden';
   }
-  cleanTheme();
-  document.addEventListener('DOMContentLoaded', cleanTheme);
+  fullTakeover();
+  document.addEventListener('DOMContentLoaded', fullTakeover);
+  setTimeout(fullTakeover, 500);
+  setTimeout(fullTakeover, 1500);
 })();
 </script>
 
