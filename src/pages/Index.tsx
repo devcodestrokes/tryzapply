@@ -58,7 +58,7 @@ const Index = () => {
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
-    return found || { starts: 0, completions: 0, claims: 0 };
+    return found || { page_visits: 0, starts: 0, completions: 0, claims: 0 };
   };
 
   const totals = analytics.reduce(
