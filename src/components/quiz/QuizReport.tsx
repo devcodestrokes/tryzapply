@@ -164,6 +164,7 @@ const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
             {!imageLoaded && (
               <div className="w-72 sm:w-52 lg:w-96 h-64 bg-muted/30 rounded-xl animate-pulse" />
             )}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
           </div>
         </div>
 
