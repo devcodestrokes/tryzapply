@@ -54,6 +54,12 @@ const QuizEngine = ({
   const sessionIdRef = useRef(generateSessionId());
   const trackedRef = useRef({ start: false, complete: false });
 
+  // Preload the report image early so it's cached when results show
+  useEffect(() => {
+    const img = new Image();
+    img.src = reportMan;
+  }, []);
+
   const totalSteps = steps.length;
   const progress = Math.round(((currentStep + 1) / (totalSteps + 1)) * 100);
 
