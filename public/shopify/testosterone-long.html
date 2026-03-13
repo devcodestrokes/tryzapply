@@ -424,7 +424,7 @@ function renderProduct(m){
   h+='<img src="'+IMAGES.zapplyProduct+'" alt="Zapply product" class="pimg">';
   h+='<button class="qcta" data-claim>CLAIM YOUR DISCOUNT</button></div>';
   m.innerHTML=h;
-  m.querySelector('[data-claim]').addEventListener('click',function(){window.open(CONFIG.claimUrl,'_blank')});
+  m.querySelector('[data-claim]').addEventListener('click',function(){trackEvent('claim');window.open(CONFIG.claimUrl,'_blank')});
 }
 
 // Preload report image
