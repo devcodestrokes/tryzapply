@@ -22,6 +22,7 @@ export interface QuizStep {
   // For interstitial type
   title?: string;
   interstitialSubtitle?: string;
+  interstitialImage?: string;
   autoAdvance?: boolean;
   autoAdvanceMs?: number;
 }
@@ -135,6 +136,7 @@ const QuizEngine = ({
             key={currentStep}
             title={step.title!}
             subtitle={step.interstitialSubtitle}
+            image={step.interstitialImage}
             autoAdvance={step.autoAdvance}
             autoAdvanceMs={step.autoAdvanceMs}
             onContinue={handleContinue}
