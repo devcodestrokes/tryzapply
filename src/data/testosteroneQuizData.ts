@@ -13,6 +13,7 @@ import bodyHeavy from "@/assets/quiz/body-heavy.png";
 import modelSleep from "@/assets/quiz/model-sleep.png";
 import modelDiet from "@/assets/quiz/model-diet.png";
 import modelBrainfog from "@/assets/quiz/model-brainfog.png";
+import beforeAfter from "@/assets/quiz/before-after.png";
 
 export const testosteroneLongSteps: QuizStep[] = [
   {
