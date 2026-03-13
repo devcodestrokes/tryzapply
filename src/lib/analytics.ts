@@ -29,6 +29,7 @@ export async function trackQuizEvent(
 
 export interface QuizAnalytics {
   quiz_variant: string;
+  page_visits: number;
   starts: number;
   completions: number;
   claims: number;
