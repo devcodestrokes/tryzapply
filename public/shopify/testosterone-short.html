@@ -111,7 +111,7 @@ var STEPS = [
     {label:'50+ Years Old'},{label:'40 - 49 Years Old'},{label:'30 - 39 Years Old'},{label:'20 - 29 Years Old'}
   ]},
   { type:'question', question:"What's your biggest concern about your masculine health right now?", options:[
-    {label:'Energy levels',emoji:'🔋'},{label:'Muscle mass and strength',emoji:'💪'},{label:'Sex drive and performance',emoji:'❤️'},{label:'Mental focus and clarity',emoji:'🧠'},{label:'Weight Loss',emoji:'⚖️'}
+    {label:'Energy levels',emoji:'😊'},{label:'Muscle mass and strength',emoji:'💪'},{label:'Sex drive and performance',emoji:'🍆'},{label:'Mental focus and clarity',emoji:'☁️'},{label:'Weight Loss',emoji:'🧘'}
   ]},
   { type:'question', question:"How's your energy at 3pm compared to when you wake up?", options:[
     {label:'Completely drained - Need caffeine or a nap',emoji:'🪫'},{label:'Noticeably lower - Afternoon slump hits hard',emoji:'📉'},{label:'Slightly tired - Still functional but slower',emoji:'😮‍💨'},{label:'Same energy - No afternoon crash',emoji:'⚡'}
@@ -155,7 +155,7 @@ function qContent(s){
   var h='<h2 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:.5rem">'+s.question+'</h2>';
   if(s.subtitle)h+='<p style="text-align:center;color:#6b7280;font-size:.875rem;margin-bottom:1rem">'+s.subtitle+'</p>';
   h+='<div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1rem">';
-  s.options.forEach(function(o,i){var sc=sel.indexOf(i)>=0?' sel':'';h+='<div class="qopt'+sc+'" data-o="'+i+'"><span class="qnum">'+(i+1)+'</span>';if(o.emoji)h+='<span class="qemoji">'+o.emoji+'</span>';h+='<span class="qlabel">'+o.label+'</span></div>'});
+  s.options.forEach(function(o,i){var sc=sel.indexOf(i)>=0?' sel':'';h+='<div class="qopt'+sc+'" data-o="'+i+'">';if(o.emoji)h+='<span class="qemoji">'+o.emoji+'</span>';h+='<span class="qlabel">'+o.label+'</span></div>'});
   h+='</div>';if(s.multiSelect&&sel.length>0)h+='<button class="qcta" style="margin-top:1.5rem" data-mc>Continue</button>';
   if(s.whyWeAsk)h+='<div class="whybox"><p class="wt">Why we ask</p><p class="wd">'+s.whyWeAsk+'</p></div>';return h;
 }
