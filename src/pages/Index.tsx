@@ -152,6 +152,7 @@ const Index = () => {
 
                   {/* Inline Stats */}
                   <div className="flex gap-4 mt-2 text-xs">
+                    <StatBadge label="Visits" value={stats.page_visits} loading={loading} />
                     <StatBadge label="Starts" value={stats.starts} loading={loading} />
                     <StatBadge label="Completed" value={stats.completions} loading={loading} />
                     <StatBadge label="Claims" value={stats.claims} loading={loading} />
