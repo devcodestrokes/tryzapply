@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AlertTriangle, TrendingDown, BarChart3, Zap, Activity } from "lucide-react";
 import reportMan from "@/assets/report-man.png";
 import type { QuizStep } from "./QuizEngine";
