@@ -129,6 +129,7 @@ function analyzeAnswers(
 
 const QuizReport = ({ focus, answers, steps }: QuizReportProps) => {
   const analysis = analyzeAnswers(focus, answers, steps);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const isTesto = focus === "testosterone";
   const title = isTesto ? "Level of T Decline" : "Level of Energy Decline";
   const assessmentTitle = isTesto
