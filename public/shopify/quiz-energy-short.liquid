@@ -76,8 +76,8 @@ main#MainContent, #MainContent, .main-content, .page-width,
 
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#fff;color:#1a2035;-webkit-font-smoothing:antialiased}
-.quiz-wrap{min-height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:#fff}
-.progress-bar{width:100%;height:6px;background:#eff0f3;position:sticky;top:0;z-index:10}
+.quiz-wrap{width:100%;height:100%;display:flex;flex-direction:column;position:relative;overflow-y:auto;overflow-x:hidden;background:#fff}
+.progress-bar{width:100%;height:6px;background:#eff0f3;position:sticky;top:0;z-index:10;flex-shrink:0}
 .progress-fill{height:100%;background:#1e3a6e;transition:width .5s ease-out}
 .quiz-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem 1rem;max-width:56rem;margin:0 auto;width:100%;position:relative;z-index:1}
 .bg-bolt{position:absolute;pointer-events:none;color:#1e3a6e}
