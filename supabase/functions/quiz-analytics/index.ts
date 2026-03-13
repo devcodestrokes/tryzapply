@@ -53,14 +53,15 @@ Deno.serve(async (req) => {
         throw new Error(`Query failed: ${error.message}`);
       }
 
-      const map: Record<string, { quiz_variant: string; starts: number; completions: number; claims: number }> = {};
+      const map: Record<string, { quiz_variant: string; page_visits: number; starts: number; completions: number; claims: number }> = {};
 
       for (const row of data) {
         if (!map[row.quiz_variant]) {
-          map[row.quiz_variant] = { quiz_variant: row.quiz_variant, starts: 0, completions: 0, claims: 0 };
+          map[row.quiz_variant] = { quiz_variant: row.quiz_variant, page_visits: 0, starts: 0, completions: 0, claims: 0 };
         }
         const entry = map[row.quiz_variant];
-        if (row.event_type === "quiz_start") entry.starts++;
+        if (row.event_type === "page_visited") entry.page_visits++;
+        else if (row.event_type === "quiz_start") entry.starts++;
         else if (row.event_type === "quiz_complete") entry.completions++;
         else if (row.event_type === "claim") entry.claims++;
       }
