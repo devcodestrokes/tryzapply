@@ -1,477 +1,53 @@
 {%- comment -%}
   Section: quiz-testosterone-long.liquid
-
-  IMAGES: Upload to Online Store > Themes > Edit code > Assets folder
-     - model-age.png
-     - report-man.png
-     - zapply-product.png
-     - tick-icon.svg
-     - before-after.png
-     - before-after-2.png
-     - before-after-3.png
-
-  CTA URL: Theme Editor > select this section > set "Claim/CTA Button URL"
+  Embeds the Testosterone Long quiz via iframe from the published Lovable app.
 {%- endcomment -%}
 
-<style>
-/* ═══════════════════════════════════════════════════
-   QUIZ SECTION — full-width within Shopify theme
-   ═══════════════════════════════════════════════════ */
-#quiz-root {
-  width: 100vw !important;
-  max-width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  min-height: 90vh;
-}
-.page__title, .page-title, .main-page-title,
-.breadcrumb, .breadcrumbs { display: none !important; }
-
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fff;color:#1a2035;-webkit-font-smoothing:antialiased}
-.quiz-wrap{width:100%;min-height:90vh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:#fff}
-.progress-bar{width:100%;height:6px;background:#eff0f3;position:sticky;top:0;z-index:10;flex-shrink:0}
-.progress-fill{height:100%;background:#1e3a6e;transition:width .5s ease-out}
-.quiz-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem 1rem;max-width:56rem;margin:0 auto;width:100%;position:relative;z-index:1}
-/* Background decorations */
-.bg-bolt{position:absolute;pointer-events:none;color:#1e3a6e}
-.bg-circle{position:absolute;border-radius:50%;filter:blur(48px);pointer-events:none}
-.bg-dots{position:absolute;inset:0;pointer-events:none;opacity:.03;background-image:radial-gradient(circle,#1e3a6e 1px,transparent 1px);background-size:40px 40px}
-.bg-grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(30,58,110,.02),transparent,rgba(30,58,110,.03))}
-/* Animations */
-@keyframes fadeSlideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.anim{animation:fadeSlideIn .4s ease-out}
-/* Options */
-.qopt{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-radius:.75rem;border:1px solid #e2e4e9;background:#fff;cursor:pointer;transition:all .2s;text-align:left;width:100%}
-.qopt:hover{border-color:rgba(30,58,110,.4);box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.qopt.sel{background:#1e3a6e;color:#fff;border-color:#1e3a6e;box-shadow:0 4px 16px rgba(30,58,110,.3)}
-.qnum{width:2rem;height:2rem;border-radius:.5rem;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;flex-shrink:0;background:#eff0f3;color:#6b7280}
-.qopt.sel .qnum{background:rgba(255,255,255,.2);color:#fff}
-.qemoji{font-size:1.125rem;flex-shrink:0}
-.qlabel{font-weight:500;font-size:.875rem}
-/* CTA */
-.qcta{width:100%;padding:1rem;border-radius:.75rem;font-weight:700;font-size:1.125rem;background:#1e3a6e;color:#fff;border:none;cursor:pointer;transition:opacity .2s}
-.qcta:hover{opacity:.9}
-/* Testimonial */
-.testi{background:#f5f6f8;border-radius:.75rem;padding:1.5rem;text-align:center;font-style:italic;color:rgba(26,32,53,.8);margin-bottom:1.5rem}
-.testi p:first-child{font-size:.875rem;margin-bottom:.5rem}
-.testi .tname{font-weight:700;font-size:.75rem;font-style:normal}
-/* Why box */
-.whybox{margin-top:1.5rem;padding:1rem;background:#f5f6f8;border-radius:.75rem}
-.whybox .wt{font-size:.75rem;font-weight:700;margin-bottom:.25rem}
-.whybox .wd{font-size:.75rem;color:#6b7280}
-/* Loading */
-.lstep{display:flex;align-items:center;gap:.75rem;color:rgba(26,32,53,.4);transition:all .3s;font-size:.875rem}
-.lstep.active{color:#1a2035;font-weight:500}
-.lstep.done{color:rgba(26,32,53,.5)}
-.lspin{width:1.25rem;height:1.25rem;border:2px solid #e2e4e9;border-top-color:#1e3a6e;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
-.lempty{width:1.25rem;height:1.25rem;border:2px solid #e2e4e9;border-radius:50%;flex-shrink:0}
-/* Report */
-.rbar{width:100%;height:1rem;border-radius:9999px;position:relative;background:linear-gradient(to right,#1e3a6e 0%,#1e3a6e 60%,#dc4545 100%)}
-.rlabel{background:#1a2035;color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:.375rem;position:relative;top:-2rem;white-space:nowrap}
-.rlabel::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg);width:8px;height:8px;background:#1a2035}
-.rdot{width:1.75rem;height:1.75rem;border-radius:50%;border:3px solid #1e3a6e;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15);position:absolute;top:50%;transform:translate(-50%,-50%)}
-/* Assessment */
-.abox{background:#fff7ed;border:1px solid #fed7aa;border-radius:.75rem;padding:1rem;display:flex;gap:.75rem;align-items:flex-start;margin-top:1rem}
-.aicon{width:2.5rem;height:2.5rem;border-radius:.5rem;background:#1e3a6e;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.atitle{font-weight:900;font-size:.875rem;margin-bottom:.25rem}
-.adesc{font-size:.75rem;color:#6b7280;line-height:1.5}
-/* Stats */
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;margin-top:1.25rem}
-.sitem{display:flex;align-items:center;gap:.5rem}
-.slbl{font-size:.625rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.1em}
-.sval{font-size:.875rem;font-weight:900}
-/* Graph */
-.gwrap{width:100%;background:#fff;border:1px solid #e2e4e9;border-radius:.75rem;padding:1rem;margin-bottom:1.5rem}
-/* Product */
-.pimg{width:100%;max-width:28rem;margin:0 auto 1.5rem;border-radius:.75rem;display:block}
-/* Interstitial */
-.icarousel{position:relative;overflow:hidden;border-radius:.75rem;min-height:280px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
-.iimg{max-height:18rem;width:auto;object-fit:contain;transition:all .5s}
-.cdots{display:flex;gap:.5rem;justify-content:center;margin-top:.75rem;margin-bottom:1.5rem}
-.cdot{width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:background .2s}
-/* Image question layout */
-.qwimg{display:flex;flex-direction:column;width:100%}
-.qimgside{display:none}
-.qcside{flex:1;display:flex;flex-direction:column;justify-content:center}
-/* Report image */
-.rimg-wrap{display:flex;justify-content:center;position:relative;z-index:1;margin-top:.25rem}
-.rimg{width:18rem;height:auto;object-fit:contain}
-.rimg-fade{position:absolute;bottom:0;left:0;right:0;height:6rem;background:linear-gradient(to top,#fff,transparent)}
-@media(min-width:768px){
-  .quiz-main{padding:2rem 1.5rem}
-  .qlabel{font-size:1rem}
-  .rimg{width:13rem}
-  .qimgside{display:flex;flex:1;align-items:flex-end;justify-content:flex-start}
-  .qwimg{flex-direction:row;gap:2rem}
-  .qsideimg{height:auto;max-height:70vh;width:auto;object-fit:contain;object-position:bottom;filter:drop-shadow(0 4px 6px rgba(0,0,0,.1))}
-}
-@media(min-width:1024px){.rimg{width:24rem}}
-</style>
-
-<div id="quiz-root">
-  <div class="quiz-wrap">
-    <!-- Background decorations -->
-    <svg class="bg-bolt" style="position:absolute;top:-10px;right:-10px;width:300px;height:450px;opacity:.04;transform:rotate(12deg)" viewBox="0 0 120 200" fill="none"><path d="M70 0L0 115h45L30 200l90-125H75L110 0H70Z" fill="currentColor"/></svg>
-    <svg class="bg-bolt" style="position:absolute;bottom:-8px;left:-8px;width:200px;height:300px;opacity:.03;transform:rotate(-25deg)" viewBox="0 0 120 200" fill="none"><path d="M70 0L0 115h45L30 200l90-125H75L110 0H70Z" fill="currentColor"/></svg>
-    <div class="bg-circle" style="top:15%;right:8%;width:12rem;height:12rem;background:rgba(30,58,110,.03)"></div>
-    <div class="bg-circle" style="bottom:20%;left:5%;width:10rem;height:10rem;background:rgba(30,58,110,.04)"></div>
-    <div class="bg-dots"></div>
-    <div class="bg-grad"></div>
-    <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
-    <div class="quiz-main" id="qm"></div>
-  </div>
+<div id="quiz-embed-testo-long" style="width:100vw;max-width:100vw;min-height:100vh;position:relative;left:50%;transform:translateX(-50%);overflow:hidden;margin:0;padding:0;">
+  <iframe
+    id="quiz-iframe-testo-long"
+    src="https://tryzapply.lovable.app/quiz/testosterone-long"
+    style="width:100%;height:100vh;border:none;display:block;"
+    allow="clipboard-write"
+    loading="eager"
+    title="Testosterone Quiz"
+  ></iframe>
 </div>
 
-<script>
-var CONFIG = {
-  focus: 'testosterone',
-  variant: 'testosterone-long',
-  headline: "Find Out What's Really Happening With Your Testosterone",
-  headlineSubtitle: "This 2-minute assessment analyzes your symptoms, lifestyle, and risk factor in order to find a solution.",
-  testimonial: { quote: "I was skeptical at first that an online quiz could help me get my T levels back, but it was super easy, took maybe a minute, and… Let's just say me and my wife are VERY happy I took this quiz.", name: "ADAM" },
-  claimUrl: '{{ section.settings.claim_url }}'
-};
-
-var IMAGES = {
-  modelAge: "{{ 'model-age.png' | asset_url }}",
-  reportMan: "{{ 'report-man.png' | asset_url }}",
-  zapplyProduct: "{{ 'zapply-product.png' | asset_url }}",
-  tickIcon: "{{ 'tick-icon.svg' | asset_url }}",
-  beforeAfter1: "{{ 'before-after.png' | asset_url }}",
-  beforeAfter2: "{{ 'before-after-2.png' | asset_url }}",
-  beforeAfter3: "{{ 'before-after-3.png' | asset_url }}"
-};
-</script>
+<style>
+  .page-title, .breadcrumbs { display: none !important; }
+  #quiz-embed-testo-long { margin: 0 !important; padding: 0 !important; }
+  @media (max-width: 749px) {
+    #quiz-embed-testo-long { min-height: 100dvh; }
+    #quiz-iframe-testo-long { height: 100dvh; }
+  }
+</style>
 
 <script>
-{%- raw -%}
-/* ============================================================
-   CONFIGURATION — UPDATE THESE FOR YOUR STORE
-   ============================================================ */
-
-
-/* ============================================================
-   IMAGE URLS — REPLACE WITH YOUR SHOPIFY CDN URLS
-   Upload images to Shopify Admin > Settings > Files
-   ============================================================ */
-
-
-/* ============================================================
-   QUIZ STEPS
-   ============================================================ */
-var STEPS = [
-  { type:'question', question:'How old are you?', image:IMAGES.modelAge, options:[
-    {label:'50+ Years Old'},{label:'40 - 49 Years Old'},{label:'30 - 39 Years Old'},{label:'20 - 29 Years Old'}
-  ]},
-  { type:'question', question:"What's your biggest concern about your masculine health right now?", options:[
-    {label:'Energy levels',emoji:'😊'},{label:'Muscle mass and strength',emoji:'💪'},{label:'Sex drive and performance',emoji:'🍆'},{label:'Mental focus and clarity',emoji:'☁️'},{label:'Weight Loss',emoji:'🧘'}
-  ]},
-  { type:'question', question:'Do you have stress symptoms during the day?', subtitle:'Like feeling tired, cranky, foggy, or moody.', options:[
-    {label:'Yes',emoji:'😩'},{label:'No',emoji:'😊'}
-  ]},
-  { type:'question', question:"How's your energy at 3pm compared to when you wake up?", options:[
-    {label:'Completely drained - Need caffeine or a nap',emoji:'🪫'},{label:'Noticeably lower - Afternoon slump hits hard',emoji:'📉'},{label:'Slightly tired - Still functional but slower',emoji:'😮‍💨'},{label:'Same energy - No afternoon crash',emoji:'⚡'}
-  ]},
-  { type:'question', question:'When did you start noticing changes to your energy and drive?', options:[
-    {label:'Over a year ago',emoji:'📅'},{label:'In the past year',emoji:'🗓️'},{label:'In the past few months',emoji:'🕐'},{label:'Not sure',emoji:'🤔'}
-  ]},
-  { type:'question', question:'What results are you expecting from increased testosterone?', subtitle:'(Choose all that apply)', multiSelect:true, options:[
-    {label:'Higher energy that lasts all day',emoji:'⚡'},{label:'Increased muscle mass and strength',emoji:'💪'},{label:'Better sex drive and performance',emoji:'🔥'},{label:'Improved mental clarity and focus',emoji:'🧠'},{label:'All of the above',emoji:'✅'}
-  ]},
-  { type:'interstitial', title:'You are in the right place! 💪', interstitialSubtitle:'Over 429,576 men have reclaimed their T, drive, and physique thanks to our NEW Scientific, Natural T-Revival System!', interstitialImages:[IMAGES.beforeAfter1,IMAGES.beforeAfter2,IMAGES.beforeAfter3] },
-  { type:'question', question:'How would you describe your current body composition?', options:[
-    {label:'Lean and muscular',emoji:'💪'},{label:'Average build',emoji:'🧍'},{label:'Soft with some muscle',emoji:'🫠'},{label:'Overweight/out of shape',emoji:'😓'}
-  ]},
-  { type:'question', question:'How many hours of quality sleep do you get per night?', options:[
-    {label:'Less than 5 hours',emoji:'😴'},{label:'5-6 hours',emoji:'🌙'},{label:'7-8 hours',emoji:'😌'},{label:'More than 8 hours',emoji:'😊'}
-  ]},
-  { type:'question', question:'Do you have a family history of diabetes, heart disease, or metabolic issues?', whyWeAsk:'These conditions share similar root causes with low testosterone — insulin resistance, inflammation, and metabolic dysfunction. Family patterns help us identify your risk factors.', options:[
-    {label:'Yes',emoji:'✅'},{label:'No',emoji:'❌'},{label:'Not Sure',emoji:'🤷'}
-  ]},
-  { type:'question', question:'How often do you eat processed foods?', whyWeAsk:'Processed foods contain chemicals and additives that disrupt hormone production. Ultra-processed foods are linked to lower testosterone levels in multiple studies.', options:[
-    {label:'Daily - Most meals include processed foods',emoji:'🍔'},{label:'Several times a week',emoji:'🍕'},{label:'Occasionally - Mostly whole foods',emoji:'🥗'},{label:'Rarely - I avoid processed foods',emoji:'🥦'}
-  ]},
-  { type:'loading' }
-];
-
-/* ============================================================
-   SVG ICONS
-   ============================================================ */
-var ICO = {
-  check:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
-  alert:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
-  down:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>',
-  bar:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>',
-  zap:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
-  activity:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
-};
-
-/* ============================================================
-   QUIZ ENGINE — DO NOT MODIFY BELOW
-   ============================================================ */
-/* Analytics tracking */
-var ANALYTICS_URL='https://glnnaymhaivqivtpivnb.supabase.co/functions/v1/quiz-analytics';
-var sessionId=crypto.randomUUID();
-var tracked={start:false,complete:false};
-function trackEvent(eventType){fetch(ANALYTICS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,quiz_variant:CONFIG.variant,event_type:eventType})}).catch(function(e){console.error('Track error:',e)})}
-trackEvent('page_visited');
-
-var step=0, answers={}, sel=[], rStep=0, rerender=false;
-
-function render(){
-  var p=Math.round(((step+1)/(STEPS.length+1))*100);
-  document.getElementById('pf').style.width=p+'%';
-  var m=document.getElementById('qm');
-  if(step>=STEPS.length){if(!tracked.complete){tracked.complete=true;trackEvent('quiz_complete')}renderResult(m);return}
-  var s=STEPS[step];
-  if(s.type==='question')renderQuestion(m,s);
-  else if(s.type==='interstitial')renderInterstitial(m,s);
-  else if(s.type==='loading')renderLoading(m);
-}
-
-function next(){step++;sel=[];render()}
-
-function handleSel(idx){
-  if(step===0&&!tracked.start){tracked.start=true;trackEvent('quiz_start')}
-  var s=STEPS[step];
-  if(s.multiSelect){
-    var i=sel.indexOf(idx);
-    if(i>=0)sel.splice(i,1);else sel.push(idx);
-    rerender=true;render();rerender=false;
-  }else{
-    sel=[idx];answers[step]=[idx];
-    document.querySelectorAll('[data-o]').forEach(function(e){e.classList.remove('sel')});
-    var el=document.querySelector('[data-o="'+idx+'"]');if(el)el.classList.add('sel');
-    setTimeout(function(){next()},300);
-  }
-}
-
-function submitMulti(){answers[step]=[].concat(sel);next()}
-
-function qContent(s){
-  var h='<h2 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:.5rem">'+s.question+'</h2>';
-  if(s.subtitle)h+='<p style="text-align:center;color:#6b7280;font-size:.875rem;margin-bottom:1rem">'+s.subtitle+'</p>';
-  h+='<div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1rem">';
-  s.options.forEach(function(o,i){
-    var sc=sel.indexOf(i)>=0?' sel':'';
-    h+='<div class="qopt'+sc+'" data-o="'+i+'">';
-    if(o.emoji)h+='<span class="qemoji">'+o.emoji+'</span>';
-    h+='<span class="qlabel">'+o.label+'</span></div>';
-  });
-  h+='</div>';
-  if(s.multiSelect&&sel.length>0)h+='<button class="qcta" style="margin-top:1.5rem" data-mc>Continue</button>';
-  if(s.whyWeAsk)h+='<div class="whybox"><p class="wt">Why we ask</p><p class="wd">'+s.whyWeAsk+'</p></div>';
-  return h;
-}
-
-function renderQuestion(m,s){
-  var ac=rerender?'':'anim';
-  var h='<div class="'+ac+'" style="width:100%">';
-  if(step===0){
-    h+='<div style="max-width:max-content;margin:0 auto 1.5rem">';
-    h+='<h1 style="font-size:1.5rem;font-weight:700;text-align:center;margin-bottom:1rem">'+CONFIG.headline+'</h1>';
-    h+='<p style="text-align:center;color:#6b7280;font-size:.875rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem">';
-    h+='<img src="'+IMAGES.tickIcon+'" alt="" style="width:12px;height:12px">'+CONFIG.headlineSubtitle+'</p>';
-    h+='<div class="testi"><p>"'+CONFIG.testimonial.quote+'"</p><p class="tname">'+CONFIG.testimonial.name+', Verified Customer</p></div>';
-    h+='</div>';
-  }
-  if(s.image&&step!==0){
-    h+='<div class="qwimg"><div class="qimgside"><img src="'+s.image+'" class="qsideimg" alt=""></div><div class="qcside">'+qContent(s)+'</div></div>';
-  }else{
-    h+='<div style="max-width:32rem;margin:0 auto;width:100%">'+qContent(s)+'</div>';
-  }
-  h+='</div>';
-  m.innerHTML=h;
-  m.querySelectorAll('[data-o]').forEach(function(e){e.addEventListener('click',function(){handleSel(parseInt(e.dataset.o))})});
-  var mc=m.querySelector('[data-mc]');if(mc)mc.addEventListener('click',submitMulti);
-}
-
-function renderInterstitial(m,s){
-  var imgs=s.interstitialImages||( s.interstitialImage?[s.interstitialImage]:[]);
-  var ci=0,iv;
-  function draw(){
-    var h='<div class="anim" style="width:100%;text-align:center">';
-    h+='<div style="font-size:2.5rem;margin-bottom:1rem">💪</div>';
-    h+='<h2 style="font-size:1.25rem;font-weight:700;margin-bottom:.75rem">'+s.title+'</h2>';
-    if(s.interstitialSubtitle)h+='<p style="color:#6b7280;font-size:.875rem;margin-bottom:1rem">'+s.interstitialSubtitle+'</p>';
-    if(imgs.length>0){
-      h+='<div class="icarousel"><img src="'+imgs[ci]+'" class="iimg" alt="Result"></div>';
-      if(imgs.length>1){
-        h+='<div class="cdots">';
-        imgs.forEach(function(_,i){h+='<button class="cdot" style="background:'+(i===ci?'#1e3a6e':'rgba(107,114,128,.3)')+'" data-d="'+i+'"></button>'});
-        h+='</div>';
-      }
+(function(){
+  var iframe = document.getElementById('quiz-iframe-testo-long');
+  var container = document.getElementById('quiz-embed-testo-long');
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'quiz-resize' && e.data.height) {
+      iframe.style.height = Math.max(e.data.height, 500) + 'px';
     }
-    h+='<button class="qcta" data-cont>Continue</button></div>';
-    m.innerHTML=h;
-    m.querySelector('[data-cont]').addEventListener('click',function(){if(iv)clearInterval(iv);next()});
-    m.querySelectorAll('[data-d]').forEach(function(e){e.addEventListener('click',function(){ci=parseInt(e.dataset.d);draw()})});
-  }
-  draw();
-  if(imgs.length>1)iv=setInterval(function(){ci=(ci+1)%imgs.length;draw()},3000);
-  if(s.autoAdvance)setTimeout(function(){if(iv)clearInterval(iv);next()},s.autoAdvanceMs||2000);
-}
-
-function renderLoading(m){
-  var ls=["Analysing your profile","Gathering relevant data","Finalizing calculations","Almost there..."];
-  var cs=0;
-  function draw(){
-    var h='<div class="anim" style="width:100%"><h2 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:2rem">Building your profile...</h2>';
-    h+='<div style="display:flex;flex-direction:column;gap:1rem;max-width:20rem;margin:0 auto">';
-    ls.forEach(function(s,i){
-      var cls=i<cs?'lstep done':i===cs?'lstep active':'lstep';
-      var ico=i<cs?ICO.check:i===cs?'<div class="lspin"></div>':'<div class="lempty"></div>';
-      h+='<div class="'+cls+'">'+ico+'<span>'+s+'</span></div>';
-    });
-    h+='</div></div>';m.innerHTML=h;
-  }
-  draw();
-  var iv=setInterval(function(){
-    cs++;if(cs>=ls.length){clearInterval(iv);setTimeout(next,800);draw();return}draw();
-  },1200);
-}
-
-function calcScore(){
-  var sc=0;
-  STEPS.forEach(function(s,idx){
-    if(s.type!=='question'||!answers[idx])return;
-    var a=answers[idx],q=(s.question||'').toLowerCase();
-    if(q.indexOf('how old')>=0)sc+=([30,22,12,5][a[0]]||10);
-    else if(q.indexOf('energy at 3pm')>=0||q.indexOf('energy at 3 pm')>=0)sc+=([25,18,8,0][a[0]]||10);
-    else if(q.indexOf('stress symptoms')>=0)sc+=(a[0]===0?15:0);
-    else if(q.indexOf('start noticing')>=0||q.indexOf('start declining')>=0)sc+=([20,14,8,5][a[0]]||8);
-    else if(q.indexOf('body composition')>=0)sc+=([0,5,12,20][a[0]]||5);
-    else if(q.indexOf('sleep')>=0)sc+=([20,12,2,5][a[0]]||5);
-    else if(q.indexOf('family history')>=0)sc+=(a[0]===0?12:a[0]===2?6:0);
-    else if(q.indexOf('processed food')>=0||q.indexOf('diet quality')>=0)sc+=([18,12,4,0][a[0]]||5);
   });
-  return Math.min(100,Math.max(0,sc));
-}
-
-function analyze(){
-  var rs=calcScore(),level,lpos,dp,causes=[];
-  if(rs<25){level='Low';lpos=75;dp='Early Stage'}
-  else if(rs<50){level='Medium';lpos=50;dp='Moderate'}
-  else if(rs<75){level='High';lpos=25;dp='Progressive'}
-  else{level='Very High';lpos=10;dp='Accelerated'}
-  STEPS.forEach(function(s,idx){
-    if(s.type!=='question'||!answers[idx])return;
-    var q=(s.question||'').toLowerCase();
-    if(q.indexOf('stress')>=0&&answers[idx][0]===0)causes.push('Stress');
-    if(q.indexOf('sleep')>=0&&answers[idx][0]<=1)causes.push('Poor Sleep');
-    if(q.indexOf('processed')>=0&&answers[idx][0]<=1)causes.push('Diet');
-    if(q.indexOf('body composition')>=0&&answers[idx][0]>=2)causes.push('Body Fat');
-  });
-  if(!causes.length)causes.push('Lifestyle');
-  var rc=causes.slice(0,2).join(' & ');
-  var isTesto=CONFIG.focus==='testosterone';
-  var status=rs>=50?'DECLINING':rs>=25?'SUBOPTIMAL':'NEEDS ATTENTION';
-  var desc=isTesto?(rs>=50?'Your testosterone production is significantly below peak. This results from accumulated stress, metabolic slowdown, and environmental toxins.':rs>=25?'Your testosterone levels show signs of decline. Early intervention can prevent further deterioration and restore optimal function.':'Your testosterone levels show early warning signs. Taking action now can prevent future decline and keep you performing at your best.'):(rs>=50?'Your energy systems are significantly below optimal. This results from accumulated stress, poor recovery, and nutrient deficiencies.':rs>=25?'Your energy production is showing signs of decline. Targeted support can help restore your natural vitality.':'Your energy levels show room for improvement. Optimizing now can unlock significantly better daily performance.');
-  return{level:level,lpos:lpos,dp:dp,rc:rc,status:status,desc:desc,imp:rs>=50?'HIGH':rs>=25?'MODERATE':'GOOD',qi:rs>=50?'Substantial':rs>=25?'Moderate':'Noticeable',rs:rs};
-}
-
-function renderResult(m){
-  if(rStep===0)renderReport(m);
-  else if(rStep===1)renderGraph(m);
-  else renderProduct(m);
-}
-
-function renderReport(m){
-  var a=analyze(),isTesto=CONFIG.focus==='testosterone';
-  var title=isTesto?'Level of T Decline':'Level of Energy Decline';
-  var aTitle=isTesto?'Testosterone Assessment: '+a.status:'Energy Assessment: '+a.status;
-  var h='<div class="anim" style="width:100%">';
-  h+='<h2 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:1.5rem">Summary of your Profile</h2>';
-  h+='<div style="position:relative">';
-  h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;position:relative;z-index:20;margin-top:1.5rem">';
-  h+='<h2 style="font-size:1.25rem;font-weight:900;letter-spacing:-.025em">'+title+'</h2>';
-  h+='<span style="padding:.25rem .75rem;border:2px solid #1e3a6e;border-radius:.375rem;font-size:.75rem;font-weight:900;color:#1e3a6e;text-transform:uppercase;letter-spacing:.1em">'+a.level+'</span></div>';
-  h+='<div class="rimg-wrap" style="z-index:10;margin-top:.25rem"><div style="position:relative"><img src="'+IMAGES.reportMan+'" class="rimg" alt="Assessment"><div class="rimg-fade"></div></div></div>';
-  h+='<div style="position:relative;margin-top:-1.25rem;z-index:20"><div class="rbar">';
-  h+='<div style="position:absolute;top:50%;left:'+(100-a.lpos)+'%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center">';
-  h+='<div class="rlabel">YOUR LEVEL</div><div class="rdot"></div></div></div>';
-  h+='<div style="display:flex;justify-content:space-between;margin-top:.375rem;font-size:.75rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.1em"><span>Low</span><span>Normal</span><span>Medium</span><span>High</span></div></div>';
-  h+='</div>';
-  h+='<div class="abox"><div class="aicon">'+ICO.alert+'</div><div><h3 class="atitle">'+aTitle+'</h3><p class="adesc">'+a.desc+'</p></div></div>';
-  h+='<div class="sgrid">';
-  h+='<div class="sitem">'+ICO.down+'<div><p class="slbl">Decline Pattern:</p><p class="sval">'+a.dp+'</p></div></div>';
-  h+='<div class="sitem">'+ICO.bar+'<div><p class="slbl">Room for Improvement:</p><p class="sval">'+a.imp+'</p></div></div>';
-  h+='<div class="sitem">'+ICO.zap+'<div><p class="slbl">Root Causes:</p><p class="sval">'+a.rc+'</p></div></div>';
-  h+='<div class="sitem">'+ICO.activity+'<div><p class="slbl">Quality of Life Impact:</p><p class="sval">'+a.qi+'</p></div></div>';
-  h+='</div>';
-  h+='<button class="qcta" style="margin-top:1.5rem" data-rn>CONTINUE</button></div>';
-  m.innerHTML=h;
-  m.querySelector('[data-rn]').addEventListener('click',function(){rStep=1;render()});
-}
-
-function renderGraph(m){
-  var rs=calcScore(),isTesto=CONFIG.focus==='testosterone',label=isTesto?'T':'Energy';
-  var sl=Math.max(10,50-rs*.4),gi=rs>=50?60:rs>=25?45:30,gl=sl+gi;
-  var today=new Date(),mos=[];
-  for(var i=0;i<=3;i++){var d=new Date(today);d.setMonth(d.getMonth()+i);mos.push(i===0?'TODAY':d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase())}
-  var data=[sl,sl+gi*.15,sl+gi*.45,gl];
-  var fd=new Date(today);fd.setDate(fd.getDate()+90);
-  var dateStr=fd.toLocaleDateString('en-US',{month:'long',day:'numeric'});
-  var W=400,H=220,ml=60,mr=20,mt=30,mb=30,cw=W-ml-mr,ch=H-mt-mb;
-  function gx(i){return ml+(i/3)*cw}function gy(v){return mt+ch-(v/90)*ch}
-  var pts=data.map(function(v,i){return gx(i)+','+gy(v)});
-  var lp='M'+pts.join(' L'),ap=lp+' L'+gx(3)+','+gy(0)+' L'+gx(0)+','+gy(0)+' Z';
-  var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" xmlns="http://www.w3.org/2000/svg">';
-  svg+='<defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(30,100%,55%)" stop-opacity=".8"/><stop offset="100%" stop-color="hsl(30,100%,55%)" stop-opacity=".1"/></linearGradient></defs>';
-  svg+='<line x1="'+ml+'" y1="'+mt+'" x2="'+ml+'" y2="'+(H-mb)+'" stroke="#e2e4e9"/>';
-  svg+='<line x1="'+ml+'" y1="'+(H-mb)+'" x2="'+(W-mr)+'" y2="'+(H-mb)+'" stroke="#e2e4e9"/>';
-  [45,75].forEach(function(v){svg+='<line x1="'+ml+'" y1="'+gy(v)+'" x2="'+(W-mr)+'" y2="'+gy(v)+'" stroke="#e2e4e9" stroke-dasharray="3 3"/>'});
-  svg+='<path d="'+ap+'" fill="url(#gg)"/><path d="'+lp+'" fill="none" stroke="hsl(30,100%,50%)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
-  var x0=gx(0),y0=gy(data[0]),x3=gx(3),y3=gy(data[3]);
-  svg+='<circle cx="'+x0+'" cy="'+y0+'" r="6" fill="#1a2035" stroke="#fff" stroke-width="2"/>';
-  svg+='<rect x="'+(x0-40)+'" y="'+(y0+10)+'" width="80" height="20" rx="4" fill="#1a2035"/>';
-  svg+='<text x="'+x0+'" y="'+(y0+23)+'" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">YOU ARE HERE</text>';
-  svg+='<circle cx="'+x3+'" cy="'+y3+'" r="7" fill="#fff" stroke="hsl(30,100%,50%)" stroke-width="3"/>';
-  svg+='<rect x="'+(x3-55)+'" y="'+(y3-28)+'" width="110" height="20" rx="4" fill="hsl(30,100%,50%)"/>';
-  svg+='<text x="'+x3+'" y="'+(y3-15)+'" text-anchor="middle" fill="#fff" font-size="9" font-weight="800">GOAL: '+gi+'% INCREASE</text>';
-  mos.forEach(function(m,i){svg+='<text x="'+gx(i)+'" y="'+(H-5)+'" text-anchor="middle" font-size="10" font-weight="700" fill="#1a2035">'+m+'</text>'});
-  [{v:15,t:'LOW'},{v:45,t:'NORMAL'},{v:75,t:'HIGH'}].forEach(function(y){svg+='<text x="'+(ml-8)+'" y="'+(gy(y.v)+4)+'" text-anchor="end" font-size="9" font-weight="700" fill="#6b7280">'+y.t+'</text>'});
-  svg+='</svg>';
-  var h='<div class="anim" style="width:100%;padding-bottom:1.5rem">';
-  h+='<h3 style="font-size:1.125rem;font-weight:700;text-align:center;margin-bottom:.5rem">The last solution you\'ll ever need'+(isTesto?' to feel like a man again.':' to get your energy back.')+'</h3>';
-  h+='<p style="font-size:.875rem;color:#6b7280;text-align:center;margin-bottom:1rem">Based on your answers, we expect you to visibly increase '+(isTesto?'energy, strength and masculine drive':'daily energy, mental clarity and vitality')+' by <strong>'+dateStr+'</strong></p>';
-  h+='<div class="gwrap">'+svg+'</div>';
-  h+='<button class="qcta" data-rn>Continue</button></div>';
-  m.innerHTML=h;
-  m.querySelector('[data-rn]').addEventListener('click',function(){rStep=2;render()});
-}
-
-function renderProduct(m){
-  var isTesto=CONFIG.focus==='testosterone';
-  var h='<div class="anim" style="width:100%">';
-  h+='<h2 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:.5rem">'+(isTesto?"You'll Reclaim Your Energy & Drive With Just a 90-Day Supply from Zapply":"You'll Reclaim Your Energy & Vitality With Just a 90-Day Supply from Zapply")+'</h2>';
-  h+='<p style="font-size:.875rem;color:#6b7280;text-align:center;margin-bottom:.5rem">Because you qualify, we guarantee you\'ll achieve all your goals with a 90-day supply of our Natural '+(isTesto?'T-Optimization':'Energy-Optimization')+' System.</p>';
-  h+='<p style="font-size:.875rem;font-weight:700;text-align:center;margin-bottom:1rem">If not, you\'ll receive a full refund - no questions asked!</p>';
-  h+='<img src="'+IMAGES.zapplyProduct+'" alt="Zapply product" class="pimg">';
-  h+='<button class="qcta" data-claim>CLAIM YOUR DISCOUNT</button></div>';
-  m.innerHTML=h;
-  m.querySelector('[data-claim]').addEventListener('click',function(){trackEvent('claim');window.open(CONFIG.claimUrl,'_blank')});
-}
-
-// Preload report image
-(new Image()).src=IMAGES.reportMan;
-render();
-{%- endraw -%}
+  var loaded = false;
+  iframe.addEventListener('load', function() { loaded = true; });
+  setTimeout(function() {
+    if (!loaded) {
+      container.innerHTML = '<div style="text-align:center;padding:60px 20px;font-family:Inter,sans-serif;">' +
+        '<h2 style="font-size:24px;margin-bottom:16px;">Quiz temporarily unavailable</h2>' +
+        '<p style="color:#666;margin-bottom:24px;">Please try again in a few moments.</p>' +
+        '<button onclick="location.reload()" style="padding:12px 32px;background:#1a2f6b;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;">Retry</button></div>';
+    }
+  }, 15000);
+})();
 </script>
-
 
 {% schema %}
 {
-  "name": "Quiz - Testosterone Long",
-  "settings": [
-    {
-      "type": "url",
-      "id": "claim_url",
-      "label": "Claim/CTA Button URL"
-    }
-  ]
+  "name": "Testosterone Quiz (Long)",
+  "settings": []
 }
 {% endschema %}
