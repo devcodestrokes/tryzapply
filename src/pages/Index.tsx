@@ -3,49 +3,6 @@ import { fetchQuizAnalytics, type QuizAnalytics, type DateRange } from "@/lib/an
 import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
 import { DateRangePicker } from "@/components/DateRangePicker";
 
-const TIME_PRESETS: { label: string; value: string; getRange: () => DateRange }[] = [
-  {
-    label: "Today",
-    value: "today",
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      return { from: start.toISOString() };
-    },
-  },
-  {
-    label: "Last 7 days",
-    value: "7d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 7);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "Last 30 days",
-    value: "30d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 30);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "Last 90 days",
-    value: "90d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 90);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "All time",
-    value: "all",
-    getRange: () => ({}),
-  },
-];
 
 const quizzes = [
   {
