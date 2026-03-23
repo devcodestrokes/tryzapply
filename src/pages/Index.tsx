@@ -89,8 +89,16 @@ const Index = () => {
   const [analytics, setAnalytics] = useState<QuizAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
   const [timePreset, setTimePreset] = useState("all");
+  const [customFrom, setCustomFrom] = useState<Date | undefined>();
+  const [customTo, setCustomTo] = useState<Date | undefined>();
 
-  const getRange = () => {
+  const getRange = (): DateRange => {
+    if (timePreset === "custom") {
+      return {
+        from: customFrom ? customFrom.toISOString() : undefined,
+        to: customTo ? new Date(customTo.getFullYear(), customTo.getMonth(), customTo.getDate(), 23, 59, 59).toISOString() : undefined,
+      };
+    }
     const preset = TIME_PRESETS.find((p) => p.value === timePreset);
     return preset ? preset.getRange() : {};
   };
@@ -104,7 +112,7 @@ const Index = () => {
 
   useEffect(() => {
     loadAnalytics();
-  }, [timePreset]);
+  }, [timePreset, customFrom, customTo]);
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
