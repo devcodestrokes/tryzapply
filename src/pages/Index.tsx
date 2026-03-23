@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { useEffect, useState, useCallback } from "react";
 import { fetchQuizAnalytics, type QuizAnalytics, type DateRange } from "@/lib/analytics";
-import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp, CalendarIcon } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
+import { DateRangePicker } from "@/components/DateRangePicker";
 
 const TIME_PRESETS: { label: string; value: string; getRange: () => DateRange }[] = [
   {
