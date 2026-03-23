@@ -77,31 +77,22 @@ const quizzes = [
 const Index = () => {
   const [analytics, setAnalytics] = useState<QuizAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
-  const [timePreset, setTimePreset] = useState("all");
-  const [customFrom, setCustomFrom] = useState<Date | undefined>();
-  const [customTo, setCustomTo] = useState<Date | undefined>();
+  const [currentRange, setCurrentRange] = useState<DateRange>({});
 
-  const getRange = (): DateRange => {
-    if (timePreset === "custom") {
-      return {
-        from: customFrom ? customFrom.toISOString() : undefined,
-        to: customTo ? new Date(customTo.getFullYear(), customTo.getMonth(), customTo.getDate(), 23, 59, 59).toISOString() : undefined,
-      };
-    }
-    const preset = TIME_PRESETS.find((p) => p.value === timePreset);
-    return preset ? preset.getRange() : {};
-  };
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async (range: DateRange) => {
     setLoading(true);
-    const data = await fetchQuizAnalytics(getRange());
+    const data = await fetchQuizAnalytics(range);
     setAnalytics(data);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
-    loadAnalytics();
-  }, [timePreset, customFrom, customTo]);
+    loadAnalytics(currentRange);
+  }, [currentRange, loadAnalytics]);
+
+  const handleRangeChange = (range: DateRange) => {
+    setCurrentRange(range);
+  };
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
