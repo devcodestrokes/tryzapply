@@ -1,62 +1,8 @@
-import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { useEffect, useState, useCallback } from "react";
 import { fetchQuizAnalytics, type QuizAnalytics, type DateRange } from "@/lib/analytics";
-import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp, CalendarIcon } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
+import { DateRangePicker } from "@/components/DateRangePicker";
 
-const TIME_PRESETS: { label: string; value: string; getRange: () => DateRange }[] = [
-  {
-    label: "Today",
-    value: "today",
-    getRange: () => {
-      const now = new Date();
-      const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      return { from: start.toISOString() };
-    },
-  },
-  {
-    label: "Last 7 days",
-    value: "7d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 7);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "Last 30 days",
-    value: "30d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 30);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "Last 90 days",
-    value: "90d",
-    getRange: () => {
-      const d = new Date();
-      d.setDate(d.getDate() - 90);
-      return { from: d.toISOString() };
-    },
-  },
-  {
-    label: "All time",
-    value: "all",
-    getRange: () => ({}),
-  },
-];
 
 const quizzes = [
   {
@@ -88,31 +34,22 @@ const quizzes = [
 const Index = () => {
   const [analytics, setAnalytics] = useState<QuizAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
-  const [timePreset, setTimePreset] = useState("all");
-  const [customFrom, setCustomFrom] = useState<Date | undefined>();
-  const [customTo, setCustomTo] = useState<Date | undefined>();
+  const [currentRange, setCurrentRange] = useState<DateRange>({});
 
-  const getRange = (): DateRange => {
-    if (timePreset === "custom") {
-      return {
-        from: customFrom ? customFrom.toISOString() : undefined,
-        to: customTo ? new Date(customTo.getFullYear(), customTo.getMonth(), customTo.getDate(), 23, 59, 59).toISOString() : undefined,
-      };
-    }
-    const preset = TIME_PRESETS.find((p) => p.value === timePreset);
-    return preset ? preset.getRange() : {};
-  };
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async (range: DateRange) => {
     setLoading(true);
-    const data = await fetchQuizAnalytics(getRange());
+    const data = await fetchQuizAnalytics(range);
     setAnalytics(data);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
-    loadAnalytics();
-  }, [timePreset, customFrom, customTo]);
+    loadAnalytics(currentRange);
+  }, [currentRange, loadAnalytics]);
+
+  const handleRangeChange = (range: DateRange) => {
+    setCurrentRange(range);
+  };
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
@@ -143,66 +80,10 @@ const Index = () => {
         </p>
 
         {/* Time Range Filter + Refresh */}
-        <div className="flex flex-wrap items-center justify-between mb-4 w-full gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <Select value={timePreset} onValueChange={setTimePreset}>
-              <SelectTrigger className="w-[160px] h-9 text-xs">
-                <SelectValue placeholder="Time range" />
-              </SelectTrigger>
-              <SelectContent>
-                {TIME_PRESETS.map((p) => (
-                  <SelectItem key={p.value} value={p.value} className="text-xs">
-                    {p.label}
-                  </SelectItem>
-                ))}
-                <SelectItem value="custom" className="text-xs">Custom range</SelectItem>
-              </SelectContent>
-            </Select>
-
-            {timePreset === "custom" && (
-              <>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button variant="outline" className={cn("h-9 text-xs gap-1.5 px-3", !customFrom && "text-muted-foreground")}>
-                      <CalendarIcon className="w-3.5 h-3.5" />
-                      {customFrom ? format(customFrom, "MMM d, yyyy") : "From"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={customFrom}
-                      onSelect={setCustomFrom}
-                      disabled={(date) => date > new Date() || (customTo ? date > customTo : false)}
-                      initialFocus
-                      className="p-3 pointer-events-auto"
-                    />
-                  </PopoverContent>
-                </Popover>
-                <span className="text-xs text-muted-foreground">→</span>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button variant="outline" className={cn("h-9 text-xs gap-1.5 px-3", !customTo && "text-muted-foreground")}>
-                      <CalendarIcon className="w-3.5 h-3.5" />
-                      {customTo ? format(customTo, "MMM d, yyyy") : "To"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={customTo}
-                      onSelect={setCustomTo}
-                      disabled={(date) => date > new Date() || (customFrom ? date < customFrom : false)}
-                      initialFocus
-                      className="p-3 pointer-events-auto"
-                    />
-                  </PopoverContent>
-                </Popover>
-              </>
-            )}
-          </div>
+        <div className="flex items-center justify-between mb-4 w-full gap-3">
+          <DateRangePicker onChange={handleRangeChange} />
           <button
-            onClick={loadAnalytics}
+            onClick={() => loadAnalytics(currentRange)}
             disabled={loading}
             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
           >
