@@ -35,9 +35,19 @@ export interface QuizAnalytics {
   claims: number;
 }
 
-export async function fetchQuizAnalytics(): Promise<QuizAnalytics[]> {
+export interface DateRange {
+  from?: string; // ISO string
+  to?: string;   // ISO string
+}
+
+export async function fetchQuizAnalytics(range?: DateRange): Promise<QuizAnalytics[]> {
   try {
-    const res = await fetch(API_BASE, { method: "GET" });
+    const params = new URLSearchParams();
+    if (range?.from) params.set("from", range.from);
+    if (range?.to) params.set("to", range.to);
+    const qs = params.toString();
+    const url = qs ? `${API_BASE}?${qs}` : API_BASE;
+    const res = await fetch(url, { method: "GET" });
     if (!res.ok) {
       console.error("Failed to fetch analytics:", res.statusText);
       return [];

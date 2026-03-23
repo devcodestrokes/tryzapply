@@ -1,41 +1,80 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchQuizAnalytics, type QuizAnalytics } from "@/lib/analytics";
+import { fetchQuizAnalytics, type QuizAnalytics, type DateRange } from "@/lib/analytics";
 import { BarChart3, Users, CheckCircle2, ShoppingCart, RefreshCw, Eye, TrendingUp } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const VARIANT_LABELS: Record<string, { title: string; tag: string }> = {
-  "testosterone-long": { title: "Testosterone Focus — Long", tag: "Testosterone" },
-  "testosterone-short": { title: "Testosterone Focus — Short", tag: "Testosterone" },
-  "energy-long": { title: "Energy Focus — Long", tag: "Energy" },
-  "energy-short": { title: "Energy Focus — Short", tag: "Energy" },
-};
+const TIME_PRESETS: { label: string; value: string; getRange: () => DateRange }[] = [
+  {
+    label: "Today",
+    value: "today",
+    getRange: () => {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      return { from: start.toISOString() };
+    },
+  },
+  {
+    label: "Last 7 days",
+    value: "7d",
+    getRange: () => {
+      const d = new Date();
+      d.setDate(d.getDate() - 7);
+      return { from: d.toISOString() };
+    },
+  },
+  {
+    label: "Last 30 days",
+    value: "30d",
+    getRange: () => {
+      const d = new Date();
+      d.setDate(d.getDate() - 30);
+      return { from: d.toISOString() };
+    },
+  },
+  {
+    label: "Last 90 days",
+    value: "90d",
+    getRange: () => {
+      const d = new Date();
+      d.setDate(d.getDate() - 90);
+      return { from: d.toISOString() };
+    },
+  },
+  {
+    label: "All time",
+    value: "all",
+    getRange: () => ({}),
+  },
+];
 
 const quizzes = [
   {
     title: "Testosterone Focus — Long",
     description: "Full 2-minute assessment with 11 questions analyzing symptoms, lifestyle, and risk factors.",
-    path: "/quiz/testosterone-long",
     tag: "Testosterone",
     variant: "testosterone-long",
   },
   {
     title: "Testosterone Focus — Short",
     description: "Quick 60-second assessment with 5 key questions for fast results.",
-    path: "/quiz/testosterone-short",
     tag: "Testosterone",
     variant: "testosterone-short",
   },
   {
     title: "Energy Focus — Long",
     description: "Full 2-minute assessment analyzing energy patterns, diet, and lifestyle factors.",
-    path: "/quiz/energy-long",
     tag: "Energy",
     variant: "energy-long",
   },
   {
     title: "Energy Focus — Short",
     description: "Quick 60-second assessment to find the root cause of your fatigue.",
-    path: "/quiz/energy-short",
     tag: "Energy",
     variant: "energy-short",
   },
@@ -44,17 +83,23 @@ const quizzes = [
 const Index = () => {
   const [analytics, setAnalytics] = useState<QuizAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
+  const [timePreset, setTimePreset] = useState("all");
+
+  const getRange = () => {
+    const preset = TIME_PRESETS.find((p) => p.value === timePreset);
+    return preset ? preset.getRange() : {};
+  };
 
   const loadAnalytics = async () => {
     setLoading(true);
-    const data = await fetchQuizAnalytics();
+    const data = await fetchQuizAnalytics(getRange());
     setAnalytics(data);
     setLoading(false);
   };
 
   useEffect(() => {
     loadAnalytics();
-  }, []);
+  }, [timePreset]);
 
   const getStats = (variant: string) => {
     const found = analytics.find((a) => a.quiz_variant === variant);
@@ -84,48 +129,20 @@ const Index = () => {
           Real-time analytics for all quiz variants
         </p>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8 w-full">
-          <SummaryCard
-            icon={<Eye className="w-4 h-4" />}
-            label="Page Visits"
-            value={totals.page_visits}
-            loading={loading}
-          />
-          <SummaryCard
-            icon={<Users className="w-4 h-4" />}
-            label="Total Starts"
-            value={totals.starts}
-            loading={loading}
-          />
-          <SummaryCard
-            icon={<CheckCircle2 className="w-4 h-4" />}
-            label="Completions"
-            value={totals.completions}
-            loading={loading}
-          />
-          <SummaryCard
-            icon={<ShoppingCart className="w-4 h-4" />}
-            label="Claims"
-            value={totals.claims}
-            loading={loading}
-          />
-          <SummaryCard
-            icon={<BarChart3 className="w-4 h-4" />}
-            label="Completion Rate"
-            value={`${completionRate}%`}
-            loading={loading}
-          />
-          <SummaryCard
-            icon={<TrendingUp className="w-4 h-4" />}
-            label="Conversion Rate"
-            value={`${claimRate}%`}
-            loading={loading}
-          />
-        </div>
-
-        {/* Refresh Button */}
-        <div className="flex justify-end mb-3 w-full">
+        {/* Time Range Filter + Refresh */}
+        <div className="flex items-center justify-between mb-4 w-full gap-3">
+          <Select value={timePreset} onValueChange={setTimePreset}>
+            <SelectTrigger className="w-[160px] h-9 text-xs">
+              <SelectValue placeholder="Time range" />
+            </SelectTrigger>
+            <SelectContent>
+              {TIME_PRESETS.map((p) => (
+                <SelectItem key={p.value} value={p.value} className="text-xs">
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <button
             onClick={loadAnalytics}
             disabled={loading}
@@ -136,17 +153,23 @@ const Index = () => {
           </button>
         </div>
 
-        {/* Quiz List with Stats */}
+        {/* Summary Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8 w-full">
+          <SummaryCard icon={<Eye className="w-4 h-4" />} label="Page Visits" value={totals.page_visits} loading={loading} />
+          <SummaryCard icon={<Users className="w-4 h-4" />} label="Total Starts" value={totals.starts} loading={loading} />
+          <SummaryCard icon={<CheckCircle2 className="w-4 h-4" />} label="Completions" value={totals.completions} loading={loading} />
+          <SummaryCard icon={<ShoppingCart className="w-4 h-4" />} label="Claims" value={totals.claims} loading={loading} />
+          <SummaryCard icon={<BarChart3 className="w-4 h-4" />} label="Completion Rate" value={`${completionRate}%`} loading={loading} />
+          <SummaryCard icon={<TrendingUp className="w-4 h-4" />} label="Conversion Rate" value={`${claimRate}%`} loading={loading} />
+        </div>
+
+        {/* Quiz List with Stats (non-clickable) */}
         <div className="w-full flex flex-col gap-3">
           {quizzes.map((quiz) => {
             const stats = getStats(quiz.variant);
             const qCompRate = stats.starts > 0 ? Math.round((stats.completions / stats.starts) * 100) : 0;
             return (
-              <Link
-                key={quiz.path}
-                to={quiz.path}
-                className="quiz-option group hover:shadow-lg"
-              >
+              <div key={quiz.variant} className="quiz-option">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
@@ -155,8 +178,6 @@ const Index = () => {
                   </div>
                   <p className="font-bold text-sm text-foreground">{quiz.title}</p>
                   <p className="text-xs text-muted-foreground mt-1">{quiz.description}</p>
-
-                  {/* Inline Stats */}
                   <div className="flex gap-4 mt-2 text-xs">
                     <StatBadge label="Visits" value={stats.page_visits} loading={loading} />
                     <StatBadge label="Starts" value={stats.starts} loading={loading} />
@@ -165,8 +186,7 @@ const Index = () => {
                     <StatBadge label="Rate" value={`${qCompRate}%`} loading={loading} />
                   </div>
                 </div>
-                <span className="text-muted-foreground group-hover:text-primary transition-colors">→</span>
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -175,17 +195,7 @@ const Index = () => {
   );
 };
 
-function SummaryCard({
-  icon,
-  label,
-  value,
-  loading,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: number | string;
-  loading: boolean;
-}) {
+function SummaryCard({ icon, label, value, loading }: { icon: React.ReactNode; label: string; value: number | string; loading: boolean }) {
   return (
     <div className="rounded-xl border border-border bg-card p-3 flex flex-col gap-1">
       <div className="flex items-center gap-1.5 text-muted-foreground">
@@ -199,21 +209,10 @@ function SummaryCard({
   );
 }
 
-function StatBadge({
-  label,
-  value,
-  loading,
-}: {
-  label: string;
-  value: number | string;
-  loading: boolean;
-}) {
+function StatBadge({ label, value, loading }: { label: string; value: number | string; loading: boolean }) {
   return (
     <span className="text-muted-foreground">
-      <span className="font-semibold text-foreground">
-        {loading ? "—" : value}
-      </span>{" "}
-      {label}
+      <span className="font-semibold text-foreground">{loading ? "—" : value}</span> {label}
     </span>
   );
 }
