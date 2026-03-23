@@ -43,11 +43,24 @@ Deno.serve(async (req) => {
       });
     }
 
-    // GET: fetch aggregated analytics
+    // GET: fetch aggregated analytics with optional date filtering
     if (req.method === "GET") {
-      const { data, error } = await supabase
+      const url = new URL(req.url);
+      const from = url.searchParams.get("from");
+      const to = url.searchParams.get("to");
+
+      let query = supabase
         .from("quiz_events")
         .select("quiz_variant, event_type");
+
+      if (from) {
+        query = query.gte("created_at", from);
+      }
+      if (to) {
+        query = query.lte("created_at", to);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         throw new Error(`Query failed: ${error.message}`);
